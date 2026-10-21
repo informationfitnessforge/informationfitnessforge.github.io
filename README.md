@@ -15,8 +15,7 @@ All openly licensed via Wikimedia Commons (credited in the site footer):
 |---|---|---|
 | `hero-fire.jpg` | [Closeup of raging flames in a large bonfire](https://commons.wikimedia.org/wiki/File:Closeup_of_raging_flames_in_a_large_bonfire._-_Flickr_-_shixart1985.jpg), Nenad Stojkovic | CC BY 2.0 |
 | `goal-weight.jpg` | [Healthy meal planning with fresh fruits and vegetables](https://commons.wikimedia.org/wiki/File:Healthy_meal_planning_with_fresh_fruits_and_vegetables_in_a_bright_kitchen_setting.jpg), Nenad Stojkovic | CC BY 2.0 |
-| `goal-cardio.jpg` | [Young man running on treadmill](https://commons.wikimedia.org/wiki/File:Young_man_running_on_treadmill_during_sports_training_in_a_gym.jpg), Nenad Stojkovic | CC BY 2.0 |
-| `goal-strength.jpg` | [Fit young man doing deadlift exercise in gym](https://commons.wikimedia.org/wiki/File:Fit_young_man_doing_deadlift_exercise_in_gym.jpg), Nenad Stojkovic | CC BY 2.0 |
-| `goal-multi.jpg` | [Woman doing squat workout in gym with barbell](https://commons.wikimedia.org/wiki/File:Woman_doing_squat_workout_in_gym_with_barbell.jpg), Nenad Stojkovic | CC BY 2.0 |
+| `goal-cardio.jpg` | [Ederle Gym Spin Cycle Class Photo 1](https://commons.wikimedia.org/wiki/File:Ederle_Gym_Spin_Cycle_Class_Photo_1_(6382546).jpg), Pfc. Trinity Carter, U.S. Army | Public domain |
+| `goal-strength.jpg` | [Marines' voices echo, prompt new gym hours](https://commons.wikimedia.org/wiki/File:Marines%27_voices_echo,_prompt_new_gym_hours_150927-M-AI083-067.jpg), Lance Cpl. Jason Jimenez, USMC | Public domain |
+| `goal-multi.jpg` | [Kettlebell workout](https://commons.wikimedia.org/wiki/File:Kettlebell_workout.jpg), Rafaelqcn | CC BY-SA 4.0 |
 | `goal-other.jpg` | [Blacksmith's fire](https://commons.wikimedia.org/wiki/File:Blacksmith%27s_fire_(30148481152).jpg), David Whelan | CC0 |
-| `lifter.svg` | [Weightlifting pictogram](https://commons.wikimedia.org/wiki/File:Weightlifting_pictogram.svg), Thadius856 & Parutakupiu | Public domain |

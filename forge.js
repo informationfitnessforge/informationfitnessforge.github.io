@@ -1,85 +1,87 @@
 // The Forge: pick a goal, see its consultation, toggle add-ons, and send the plan.
 
-const EMAIL = 'informationfitnessforge@gmail.com';
+const EMAIL = 'information.fitness.forge@gmail.com';
 const PROMO = 25;
 
+// Wording is Adam's own, from his content doc.
 const ADDONS = {
   equipment: {
     name: 'Equipment Access',
     price: '+$5 / hour',
-    text: 'One-hour access to exercise equipment at the PERFORM Centre, Concordia University, Loyola Campus. Full access is limited unless you hold a PERFORM Centre membership.',
+    text: 'Simple one-hour access to exercise equipment at Perform Centre at Concordia University, Loyola Campus; full access limited unless purchasing Perform Centre membership.',
   },
   training: {
     name: 'Personal Training',
     price: '+$15 / session',
-    text: 'Your consultation done in person at the PERFORM Centre, with guided exercise and technique demonstrations to complement your personalized routine.',
+    text: 'Exercise consultation being done in-person at the Perform Centre at Concordia University, Loyola Campus with guided exercise and technique demonstrations to complement the personalized exercise routine.',
   },
   accountability: {
     name: 'Weekly Accountability',
     price: '+$5 / week',
-    text: 'Weekly phone calls to track progress, solve problems, keep motivation high, or just catch up on life.',
+    text: 'Weekly phone calls to track progress on goals, address problems, increase motivation, or just a friendly chat about life updates.',
   },
   month: {
     name: 'One-Month Deal',
     price: '$375 total',
-    text: 'Four one-hour sessions, once a week for a month, for close progress tracking and weekly adjustments to your plan, at a reduced price.',
+    text: '4 x one-hour sessions, once a week within one month to allow for close progress tracking and weekly adjustments to current plans at a reduced price.',
   },
   oncall: {
     name: 'On-Call',
     price: '+$250 / month',
-    text: 'A month of instant messaging for quick advice, support, or feedback on your plan. Guaranteed replies within 1–2 business hours.',
+    text: 'One-month instant messaging abilities intended for quick advice, support, or feedback on current plans to support serious fitness goals; guaranteed responses within 1-2 business hours.',
   },
 };
+
+const EXERCISE_CONSULT = { name: 'Exercise Consultation', length: 'One hour', price: 100,
+  text: 'One-hour session expanding exercise basics, uncovering health benefits, and designing tailored routine.' };
 
 const GOALS = [
   {
     id: 'weight',
     name: 'Weight Management',
-    blurb: 'Increase lifespan, reverse aging, and feel at home in your body by learning to lose weight, reduce fat, and dramatically improve your quality of life.',
+    blurb: 'Increase lifespan, reverse aging, and feel comfortable in your body through learning how to lose weight, reduce fat, and drastically improve quality of life.',
     img: 'assets/goal-weight.jpg',
     alt: 'Hands writing a meal plan beside a bowl of fresh fruit and a salad',
     consult: { name: 'Nutrition Consultation', length: 'One hour', price: 100,
-      text: 'Build your nutrition knowledge, explore weight-loss strategies, and leave with a personalized plan.' },
+      text: 'One-hour session covering nutrition knowledge, exploring weight-loss strategies, and creating personalized plans.' },
     addons: ['accountability', 'month'],
   },
   {
     id: 'cardio',
-    name: 'Cardiovascular Health',
-    blurb: 'Train the most important muscle in the body, the heart, to extend your lifespan, cut disease risk, and become as fit as you can be.',
+    name: 'Improve Cardiovascular Health',
+    blurb: 'Train the most important muscle in the body, the heart, in order to extend lifespan, reduce disease risk, and become as fit as possible.',
     img: 'assets/goal-cardio.jpg',
-    alt: 'A man stepping onto a treadmill in a gym',
-    consult: { name: 'Exercise Consultation', length: 'One hour', price: 100,
-      text: 'Expand on exercise basics, uncover the health benefits, and design a routine tailored to you.' },
+    alt: 'Silhouettes of people riding bikes in a spin class',
+    consult: EXERCISE_CONSULT,
     addons: ['equipment', 'training', 'accountability', 'month'],
   },
   {
     id: 'strength',
-    name: 'Strength & Muscle',
-    blurb: 'Craft a powerful physique that resists age-related muscle loss, improves body composition, and is as strong as it can be.',
+    name: 'Build Strength and Muscle',
+    blurb: 'Craft a powerful physique capable of resisting age-related muscle loss, improving body composition, and being the strongest it can.',
     img: 'assets/goal-strength.jpg',
-    alt: 'A man setting up for a barbell deadlift',
-    consult: { name: 'Exercise Consultation', length: 'One hour', price: 100,
-      text: 'Expand on exercise basics, uncover the health benefits, and design a routine tailored to you.' },
+    alt: 'A rack of heavy dumbbells in a gym',
+    consult: EXERCISE_CONSULT,
     addons: ['equipment', 'training', 'accountability', 'month'],
   },
   {
     id: 'multi',
     name: 'Multiple Goals',
-    blurb: 'An integrated approach that optimizes nutrition and exercise together to lengthen life, reduce disease, improve fitness, and build your best physique.',
+    blurb: 'Develop an integrated approach to optimizing both nutrition and exercise simultaneously in order to increase lifespan, reduce disease, improve fitness, and build your best physique.',
     img: 'assets/goal-multi.jpg',
-    alt: 'A woman performing a barbell back squat',
+    alt: 'A man pressing a kettlebell overhead in a gym',
     consult: { name: 'Integrated Health Consultation', length: '90 minutes', price: 150,
-      text: 'Combine nutrition and exercise expertise, explore multiple strategies, and develop an integrated lifestyle plan.' },
+      text: '90-minute session combining knowledge from both nutrition and exercise, exploring multiple strategies, and developing an integrated lifestyle plan.' },
     addons: ['equipment', 'training', 'accountability', 'month', 'oncall'],
   },
   {
     id: 'other',
-    name: 'Something Else',
-    blurb: 'A goal of your own? Together we design the best route to the specific health and fitness outcome you are chasing.',
+    name: 'Other',
+    blurb: 'Designing methods of optimizing routes to other specific health and fitness goals not explicitly listed previously to aid in achieving ideal health status.',
     img: 'assets/goal-other.jpg',
-    alt: 'Coal glowing white-hot in a blacksmith\'s forge',
+    alt: "Coal glowing white-hot in a blacksmith's forge",
     consult: { name: 'Specialized Goal Consultation', length: '60 minutes', price: 100,
-      text: 'Focus on one specific health goal and program the means to achieve it.' },
+      text: '60-minute session addressing a specific health goal and programming means to achieve it.' },
     addons: ['equipment', 'accountability', 'oncall'],
   },
 ];
