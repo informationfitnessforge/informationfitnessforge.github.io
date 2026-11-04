@@ -2,8 +2,11 @@
 
 Static site for Fitness Forge, hosted on GitHub Pages from `main` (repo `informationfitnessforge/informationfitnessforge.github.io`).
 
-- `index.html`: page layout and copy
+- `index.html`: home page
+- `forge/`, `about/`, `contact/`: the other pages (each repeats the shared header and footer)
+- `testimonials/`: template layout with placeholder content; not linked from the menu
 - `forge.js`: the goals, consultations, add-ons and prices (edit `GOALS` / `ADDONS` to change offerings)
+- `site.js`: footer year and current-page highlight in the menu
 - `styles.css`: styles
 - `CNAME`: custom domain for GitHub Pages
 

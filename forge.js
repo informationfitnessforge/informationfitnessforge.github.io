@@ -1,88 +1,114 @@
-// The Forge: pick a goal, see its consultation, toggle add-ons, and send the plan.
+// The Forge: pick a goal, choose a consultation, add extras, then email the plan.
 
 const EMAIL = 'information.fitness.forge@gmail.com';
-const PROMO = 25;
 
-// Wording is Adam's own, from his content doc.
+// Wording is Adam's own, from FitnessForge v2.
 const ADDONS = {
-  equipment: {
-    name: 'Equipment Access',
-    price: '+$5 / hour',
-    text: 'Simple one-hour access to exercise equipment at Perform Centre at Concordia University, Loyola Campus; full access limited unless purchasing Perform Centre membership.',
+  flame: {
+    name: 'Constant Flame',
+    price: '+$10 / week',
+    lore: 'Continual heat to persuade any metal to be shaped according to its intended purpose.',
+    text: 'Weekly accountability, progress tracking or updates: weekly email check-ins of quick phone calls (under 15 minutes).',
   },
   training: {
-    name: 'Personal Training',
-    price: '+$15 / session',
-    text: 'Exercise consultation being done in-person at the Perform Centre at Concordia University, Loyola Campus with guided exercise and technique demonstrations to complement the personalized exercise routine.',
+    name: 'Personal Forge Training',
+    price: '+$20 / session',
+    lore: 'Experience guided demonstrations for crafting your goals by the hands of an expert craftsman.',
+    text: 'Additional personal training session for exercise demonstration and technique critique to complement your consult; 15-30 minute extended consult, virtual or in person at limited locations.',
   },
-  accountability: {
-    name: 'Weekly Accountability',
-    price: '+$5 / week',
-    text: 'Weekly phone calls to track progress on goals, address problems, increase motivation, or just a friendly chat about life updates.',
-  },
-  month: {
-    name: 'One-Month Deal',
-    price: '$375 total',
-    text: '4 x one-hour sessions, once a week within one month to allow for close progress tracking and weekly adjustments to current plans at a reduced price.',
-  },
-  oncall: {
-    name: 'On-Call',
+  access: {
+    name: 'Forgemaster Access',
     price: '+$250 / month',
-    text: 'One-month instant messaging abilities intended for quick advice, support, or feedback on current plans to support serious fitness goals; guaranteed responses within 1-2 business hours.',
+    lore: 'Gain access to the foremost sculpting and crafting knowledge in all the lands, directly in the palm of your hands.',
+    text: 'Instant messaging for quick advice, support or feedback on your current plan to support serious goals; guaranteed responses within 1-2 hours, 8am to 8pm.',
+  },
+  testing: {
+    name: 'Testing the Fire',
+    price: '+$50-150 / assessment',
+    lore: 'Assessment of skills in the forge and judgement by the wisest of masters.',
+    text: 'Additional performance testing session to complement your consult; 15-30 minute extended consult, virtual or in person at limited locations.',
   },
 };
 
-const EXERCISE_CONSULT = { name: 'Exercise Consultation', length: 'One hour', price: 100,
-  text: 'One-hour session expanding exercise basics, uncovering health benefits, and designing tailored routine.' };
+const LORE = {
+  quick: 'Appeal to the Forgemaster for advice from afar, learning the tips and tricks of the craft.',
+  learner: 'Work face-to-face with the Forgemaster to learn how to craft your ideal tool from the hands of an expert.',
+  apprentice: 'Long-term commitment to crafting under the Forgemaster involving extensive learning, close tracking, and evolution of student into master.',
+};
+
+const consult = (id, name, length, price, from, text) => ({ id, name, length, price, from, lore: LORE[id], text });
+
+const STANDARD = [
+  consult('quick', 'Quick Advice', '30 minutes', 45, true,
+    'Thirty-minute session covering basic knowledge and planning for achieving your goal!'),
+  consult('learner', 'Learner Consult', 'One hour', 100, true,
+    'One-hour session covering knowledge, exploring modes of action, and creating personalized designs for achieving your goal!'),
+  consult('apprentice', 'Extended Apprenticeship', 'One month: four weekly one-hour sessions', 375, true,
+    'Four weekly one-hour sessions for knowledge endowment, actionable plans, tailored strategies, and regular readjustments to achieving your goal!'),
+];
 
 const GOALS = [
   {
-    id: 'weight',
-    name: 'Weight Management',
-    blurb: 'Increase lifespan, reverse aging, and feel comfortable in your body through learning how to lose weight, reduce fat, and drastically improve quality of life.',
-    img: 'assets/goal-weight.jpg',
+    id: 'sculpt',
+    name: 'Sculpt a New Physique',
+    lore: 'Every good sculpture begins with a block of stone where only delicate and precise skill can uncover the work within.',
+    blurb: 'Learn proper skills for weight management in order to lose weight, reduce fat, improve quality of life, and feel comfortable in your new body!',
+    img: '/assets/goal-weight.jpg',
     alt: 'Hands writing a meal plan beside a bowl of fresh fruit and a salad',
-    consult: { name: 'Nutrition Consultation', length: 'One hour', price: 100,
-      text: 'One-hour session covering nutrition knowledge, exploring weight-loss strategies, and creating personalized plans.' },
-    addons: ['accountability', 'month'],
+    consults: STANDARD,
+    addons: ['flame', 'access', 'testing'],
   },
   {
-    id: 'cardio',
-    name: 'Improve Cardiovascular Health',
-    blurb: 'Train the most important muscle in the body, the heart, in order to extend lifespan, reduce disease risk, and become as fit as possible.',
-    img: 'assets/goal-cardio.jpg',
-    alt: 'Silhouettes of people riding bikes in a spin class',
-    consult: EXERCISE_CONSULT,
-    addons: ['equipment', 'training', 'accountability', 'month'],
-  },
-  {
-    id: 'strength',
-    name: 'Build Strength and Muscle',
-    blurb: 'Craft a powerful physique capable of resisting age-related muscle loss, improving body composition, and being the strongest it can.',
-    img: 'assets/goal-strength.jpg',
+    id: 'foundations',
+    name: 'Lay Strong Foundations',
+    lore: 'The tallest towers require a firm and stable foundation, one laid with the best iron and architected with the most skillful hands.',
+    blurb: 'Utilize the very best techniques to increase muscle mass and strength, allowing you to look and feel stronger than ever before!',
+    img: '/assets/goal-strength.jpg',
     alt: 'A rack of heavy dumbbells in a gym',
-    consult: EXERCISE_CONSULT,
-    addons: ['equipment', 'training', 'accountability', 'month'],
+    consults: STANDARD,
+    addons: ['flame', 'training', 'access', 'testing'],
   },
   {
-    id: 'multi',
-    name: 'Multiple Goals',
-    blurb: 'Develop an integrated approach to optimizing both nutrition and exercise simultaneously in order to increase lifespan, reduce disease, improve fitness, and build your best physique.',
-    img: 'assets/goal-multi.jpg',
+    id: 'furnace',
+    name: 'Upgrade the Furnace that Fuels',
+    lore: 'Only the strongest of flames can forge the sharpest of blades within the heart of the furnace.',
+    blurb: 'Use the best tools to improve cardiovascular health by training the most important muscle of the body, the heart, keeping the body’s furnace burning strong and ensuring you feel as fit as possible!',
+    img: '/assets/goal-cardio.jpg',
+    alt: 'Silhouettes of people riding bikes in a spin class',
+    consults: STANDARD,
+    addons: ['flame', 'training', 'access', 'testing'],
+  },
+  {
+    id: 'masterwork',
+    name: 'Forge the Ultimate Work of Art',
+    lore: 'The best tool is one that is pieced together in the hottest flames, crafted of the strongest materials, and carved with expert precision.',
+    blurb: 'Combine skills from cardiovascular training, building muscle, and managing weight for an integrated approach to achieving the best version of you!',
+    img: '/assets/goal-multi.jpg',
     alt: 'A man pressing a kettlebell overhead in a gym',
-    consult: { name: 'Integrated Health Consultation', length: '90 minutes', price: 150,
-      text: '90-minute session combining knowledge from both nutrition and exercise, exploring multiple strategies, and developing an integrated lifestyle plan.' },
-    addons: ['equipment', 'training', 'accountability', 'month', 'oncall'],
+    consults: [
+      consult('quick', 'Quick Advice', '45 minutes', 75, true,
+        'Forty-five-minute session covering basic knowledge and planning for achieving your goal!'),
+      consult('learner', 'Learner Consult', '90 minutes', 150, true,
+        'Ninety-minute session covering knowledge, exploring modes of action, and creating personalized designs for achieving your goal!'),
+      consult('apprentice', 'Extended Apprenticeship', 'One month: one 90-minute and three one-hour sessions', 500, true,
+        'Weekly sessions for knowledge endowment, actionable plans, tailored strategies, and regular readjustments to achieving your goal!'),
+    ],
+    addons: ['flame', 'training', 'access', 'testing'],
   },
   {
-    id: 'other',
-    name: 'Other',
-    blurb: 'Designing methods of optimizing routes to other specific health and fitness goals not explicitly listed previously to aid in achieving ideal health status.',
-    img: 'assets/goal-other.jpg',
+    id: 'designs',
+    name: 'Craft New Designs',
+    lore: 'All quests are different, and individual journeys may call for an expansion of services or unique crafts.',
+    blurb: 'Accomplish personal health goals not on display, working closely with expert hands to craft all the designs needed for your specific task!',
+    img: '/assets/goal-other.jpg',
     alt: "Coal glowing white-hot in a blacksmith's forge",
-    consult: { name: 'Specialized Goal Consultation', length: '60 minutes', price: 100,
-      text: '60-minute session addressing a specific health goal and programming means to achieve it.' },
-    addons: ['equipment', 'accountability', 'oncall'],
+    consults: [
+      consult('quick', 'Quick Advice', '30 minutes', 60, false,
+        'Thirty-minute session covering basic knowledge and planning for achieving your goal!'),
+      consult('learner', 'Learner Consult', '45 minutes', 75, false,
+        'Forty-five-minute session covering knowledge, exploring modes of action, and creating personalized designs for achieving your goal!'),
+    ],
+    addons: ['flame', 'access'],
   },
 ];
 
@@ -91,8 +117,11 @@ const goalsEl = $('#goals');
 const anvil = $('#anvil');
 const steps = document.querySelectorAll('.steps li');
 
-let current = null;
+let goal = null;
+let chosenConsult = null;
 const chosen = new Set();
+
+const priceLabel = (c) => (c.from ? `from $${c.price}` : `$${c.price}`);
 
 function renderGoals() {
   goalsEl.innerHTML = GOALS.map((g) => `
@@ -110,7 +139,8 @@ function renderGoals() {
 }
 
 function selectGoal(id) {
-  current = GOALS.find((g) => g.id === id);
+  goal = GOALS.find((g) => g.id === id);
+  chosenConsult = null;
   chosen.clear();
   goalsEl.querySelectorAll('.goal').forEach((b) => {
     const on = b.dataset.id === id;
@@ -118,21 +148,25 @@ function selectGoal(id) {
     b.setAttribute('aria-checked', on);
   });
 
-  const c = current.consult;
-  $('#consult').innerHTML = `
-    <p class="eyebrow">${current.name}</p>
-    <div class="consult-head">
-      <h3>${c.name}</h3>
-      <span class="price">$${c.price}</span>
-    </div>
-    <p class="consult-len">${c.length}</p>
-    <p>${c.text}</p>`;
+  $('#goal-intro').innerHTML = `
+    <p class="eyebrow">${goal.name}</p>
+    <p class="lore">${goal.lore}</p>
+    <p>${goal.blurb}</p>`;
 
-  $('#addons').innerHTML = current.addons.map((key, i) => {
+  $('#consults').innerHTML = goal.consults.map((c, i) => `
+    <button class="option" role="radio" aria-checked="false" data-id="${c.id}" style="--i:${i}">
+      <span class="option-top"><span class="option-name">${c.name}</span><span class="option-price">${priceLabel(c)}</span></span>
+      <span class="option-len">${c.length}</span>
+      <span class="option-lore">${c.lore}</span>
+      <span class="option-text">${c.text}</span>
+    </button>`).join('');
+
+  $('#addons').innerHTML = goal.addons.map((key, i) => {
     const a = ADDONS[key];
     return `
       <button class="addon" aria-pressed="false" data-key="${key}" style="--i:${i}">
         <span class="addon-top"><span class="addon-name">${a.name}</span><span class="addon-price">${a.price}</span></span>
+        <span class="option-lore">${a.lore}</span>
         <span class="addon-text">${a.text}</span>
       </button>`;
   }).join('');
@@ -142,7 +176,6 @@ function selectGoal(id) {
   anvil.classList.remove('lit');
   void anvil.offsetWidth;
   anvil.classList.add('lit');
-  steps.forEach((s, i) => s.classList.toggle('on', i <= 1));
   renderSummary();
 
   if (anvil.getBoundingClientRect().top > window.innerHeight * 0.6) {
@@ -151,15 +184,27 @@ function selectGoal(id) {
 }
 
 function renderSummary() {
-  const c = current.consult;
-  const items = [`<li><span>${c.name}</span><span>$${c.price}</span></li>`];
-  chosen.forEach((key) => {
-    items.push(`<li><span>${ADDONS[key].name}</span><span>${ADDONS[key].price}</span></li>`);
-  });
+  const items = [];
+  if (chosenConsult) items.push(`<li><span>${chosenConsult.name}</span><span>${priceLabel(chosenConsult)}</span></li>`);
+  else items.push('<li class="empty"><span>Choose a consultation</span><span></span></li>');
+  chosen.forEach((key) => items.push(`<li><span>${ADDONS[key].name}</span><span>${ADDONS[key].price}</span></li>`));
   $('#summary-list').innerHTML = items.join('');
-  $('#summary-first').innerHTML = `First consultation: <s>$${c.price}</s> <strong>$${c.price - PROMO}</strong>`;
-  steps[2].classList.toggle('on', chosen.size > 0);
+  $('#request').classList.toggle('disabled', !chosenConsult);
+  $('#request').setAttribute('aria-disabled', !chosenConsult);
+  steps.forEach((s, i) => s.classList.toggle('on', i === 0 || (i === 1 && !!goal) || (i === 2 && !!chosenConsult)));
 }
+
+$('#consults').addEventListener('click', (e) => {
+  const btn = e.target.closest('.option');
+  if (!btn) return;
+  chosenConsult = goal.consults.find((c) => c.id === btn.dataset.id);
+  $('#consults').querySelectorAll('.option').forEach((b) => {
+    const on = b === btn;
+    b.classList.toggle('on', on);
+    b.setAttribute('aria-checked', on);
+  });
+  renderSummary();
+});
 
 $('#addons').addEventListener('click', (e) => {
   const btn = e.target.closest('.addon');
@@ -171,23 +216,15 @@ $('#addons').addEventListener('click', (e) => {
   renderSummary();
 });
 
-// "Request this plan" pre-fills the contact form with the chosen plan.
-$('#request').addEventListener('click', () => {
-  const lines = [`Hi! I'd like to book: ${current.name}`, `- ${current.consult.name} ($${current.consult.price})`];
+// "Email this plan" opens the visitor's email app with the plan written out.
+$('#request').addEventListener('click', (e) => {
+  e.preventDefault();
+  if (!chosenConsult) return;
+  const lines = [`Hi Adam! I'd like to book: ${goal.name}`, `- ${chosenConsult.name} (${priceLabel(chosenConsult)})`];
   chosen.forEach((key) => lines.push(`- ${ADDONS[key].name} (${ADDONS[key].price})`));
   lines.push('', 'A bit about me and my goals:', '');
-  const msg = $('#message');
-  msg.value = lines.join('\n');
-  setTimeout(() => { msg.focus(); msg.setSelectionRange(msg.value.length, msg.value.length); }, 400);
+  const subject = `Fitness Forge: ${goal.name}`;
+  window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
 });
 
-$('#contact-form').addEventListener('submit', (e) => {
-  e.preventDefault();
-  const f = new FormData(e.target);
-  const subject = `Fitness Forge enquiry from ${f.get('name')}`;
-  const body = `${f.get('message')}\n\n${f.get('name')}\n${f.get('email')}`;
-  window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-});
-
-$('#year').textContent = new Date().getFullYear();
 renderGoals();

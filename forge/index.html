@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Forge · Fitness Forge</title>
+  <meta name="description" content="Build your Fitness Forge plan: choose a goal, a consultation, and add-ons.">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="/">Fitness<span>Forge</span></a>
+  <nav>
+    <a href="/forge/">The Forge</a>
+    <a href="/about/">About</a>
+    <a href="/contact/">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="forge page-top">
+    <div class="section-head">
+      <p class="eyebrow">The Forge</p>
+      <h1>Choose your metal</h1>
+      <p>Every great blade starts with a choice of steel. Pick the goal that calls to you, choose how you'd like to work with the Forgemaster, then temper your plan with the add-ons that fit your life.</p>
+    </div>
+
+    <ol class="steps" aria-hidden="true">
+      <li class="on">Choose a goal</li>
+      <li>Choose a consultation</li>
+      <li>Temper with add-ons</li>
+    </ol>
+
+    <div class="goals" role="radiogroup" aria-label="Goals" id="goals"></div>
+
+    <div class="anvil" id="anvil" hidden>
+      <div class="anvil-main">
+        <div class="consult" id="goal-intro"></div>
+
+        <h2 class="block-title">Choose your consultation</h2>
+        <div class="options" id="consults" role="radiogroup" aria-label="Consultations"></div>
+
+        <h2 class="block-title">Temper it with add-ons</h2>
+        <p class="addons-hint">Optional. Tap to add them to your forge.</p>
+        <div class="addons" id="addons"></div>
+      </div>
+      <aside class="summary" aria-live="polite">
+        <h3>Your forge</h3>
+        <ul id="summary-list"></ul>
+        <p class="summary-promo">New clients: <strong>$25 off</strong> your first consultation.</p>
+        <a class="btn btn-fire" id="request" href="#">Email this plan</a>
+        <p class="summary-note">Opens your email app with your plan written out for Adam.</p>
+      </aside>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>© <span class="year"></span> Fitness Forge</p>
+  <details class="credits">
+    <summary>Photo credits</summary>
+    <ul>
+      <li>Bonfire and meal-planning photos by <a href="https://www.flickr.com/people/shixart1985/">Nenad Stojkovic</a>, <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, via Wikimedia Commons</li>
+      <li>Kettlebell workout by Rafaelqcn, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>, via Wikimedia Commons</li>
+      <li>Blacksmith's fire by David Whelan, <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>, via Wikimedia Commons</li>
+      <li>Spin class and dumbbell rack photos by the U.S. Army and U.S. Marine Corps, public domain, via Wikimedia Commons</li>
+    </ul>
+  </details>
+</footer>
+
+<script src="/site.js"></script>
+<script src="/forge.js"></script>
+</body>
+</html>

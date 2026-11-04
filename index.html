@@ -5,24 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Fitness Forge</title>
   <meta name="description" content="Fitness Forge: evidence-based nutrition and exercise coaching in Montréal, built on 7 years of one-on-one experience and graduate training in exercise science.">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
 
 <header class="nav">
-  <a class="brand" href="#top">Fitness<span>Forge</span></a>
+  <a class="brand" href="/">Fitness<span>Forge</span></a>
   <nav>
-    <a href="#forge">The Forge</a>
-    <a href="#about">About Adam</a>
-    <a href="#contact">Contact</a>
+    <a href="/forge/">The Forge</a>
+    <a href="/about/">About</a>
+    <a href="/contact/">Contact</a>
   </nav>
 </header>
 
-<main id="top">
+<main>
 
   <section class="hero">
     <div class="hero-bg" aria-hidden="true"></div>
@@ -32,131 +32,37 @@
       <h1>Enter the fiery furnace</h1>
       <p class="lede">Enter the fiery furnace where lives are reforged and ordinary is crafted into extraordinary. Join our community of motivated individuals seeking to master the art of sculpting a new physique.</p>
       <div class="hero-cta">
-        <a class="btn btn-fire" href="#forge">Enter the Forge</a>
-        <span class="promo-pill">First consult <strong>$25 off</strong></span>
+        <a class="btn btn-fire" href="/forge/">Enter the Forge</a>
+        <span class="promo-pill">New clients: <strong>$25 off</strong> your first consultation</span>
       </div>
     </div>
   </section>
 
-  <section id="forge" class="forge">
-    <div class="section-head">
+  <section class="paths">
+    <a class="path" href="/forge/">
       <p class="eyebrow">The Forge</p>
       <h2>Choose your metal</h2>
-      <p>Every great blade starts with a choice of steel. Pick the goal that calls to you, then temper your plan with the add-ons that fit your life.</p>
-    </div>
-
-    <ol class="steps" aria-hidden="true">
-      <li class="on">Choose a goal</li>
-      <li>Your consultation</li>
-      <li>Temper with add-ons</li>
-    </ol>
-
-    <div class="goals" role="radiogroup" aria-label="Health goals" id="goals"></div>
-
-    <div class="anvil" id="anvil" hidden>
-      <div class="anvil-main">
-        <div class="consult" id="consult"></div>
-        <h3 class="addons-title">Temper it with add-ons</h3>
-        <p class="addons-hint">Tap to add them to your forge.</p>
-        <div class="addons" id="addons"></div>
-      </div>
-      <aside class="summary" aria-live="polite">
-        <h3>Your forge</h3>
-        <ul id="summary-list"></ul>
-        <p class="summary-promo">Your first consultation is <strong>$25 off</strong>.</p>
-        <p class="summary-first" id="summary-first"></p>
-        <a class="btn btn-fire" id="request" href="#contact">Request this plan</a>
-      </aside>
-    </div>
-  </section>
-
-  <section id="about" class="about">
-    <div class="section-head">
-      <p class="eyebrow">Adam</p>
-      <h2>Science in the fire</h2>
-      <p class="lede">Personally worked one-on-one with many clients on optimizing weight loss, gaining muscle mass, increasing fitness, and changing lives for the better. Currently involved in a major weight loss study where I head as the exercise and nutrition consultant. Nearly 7 years of experience in total.</p>
-    </div>
-
-    <div class="creds">
-      <article class="cred">
-        <h3>Academic</h3>
-        <ul>
-          <li><strong>B.Sc. in Exercise Science:</strong> studied exercise physiology, exercise prescription, and program design</li>
-          <li><strong>M.Sc. in Exercise Science:</strong> studied exercise physiology, nutrition, and sports nutrition<sup>1, 2</sup></li>
-          <li><strong>Ph.D. in Exercise Science (Current):</strong> studying clinical nutrition, cell biology, and obesity<sup>1</sup></li>
-        </ul>
-        <ol class="notes">
-          <li>Degree or capstone project was thesis- or research-based</li>
-          <li>Includes publication of 1 or more peer-reviewed, scientific research articles</li>
-          <li>Involves mentorship of 1 or more undergraduate students</li>
-        </ol>
-      </article>
-
-      <article class="cred">
-        <h3>Certifications</h3>
-        <ul>
-          <li><strong>NSCA Certified Strength and Conditioning Specialist w/ Honorary Distinction (CSCS*D):</strong> rigorous examination and practical application to allow specialized strength training in general and athletic populations<sup>1, 2</sup></li>
-          <li><strong>NSCA Certified Personal Trainer w/ Honorary Distinction (NSCA-CPT*D):</strong> rigorous examination to allow for general exercise training prescription<sup>1, 2</sup></li>
-          <li><strong>AED/CPR BLS:</strong> basic CPR and AED-use life services and support<sup>2</sup></li>
-        </ul>
-        <ol class="notes">
-          <li>Distinction is a specially designed certificate honoring members who volunteer, contribute, and play a significant role in fulfilling the NSCA's mission beyond normal requirements</li>
-          <li>Requires continuous re-certification</li>
-        </ol>
-      </article>
-
-      <article class="cred">
-        <h3>Professional</h3>
-        <ul>
-          <li><strong>Undergraduate Teaching Assistant:</strong> Physiology Lab, and Dystopian Literature<sup>1, 2</sup></li>
-          <li><strong>Graduate Teaching Associate:</strong> Fitness Walking, Physical Conditioning, Anatomy Lab, Exercise Physiology Lab<sup>1, 2, 3</sup></li>
-          <li><strong>Graduate Teaching Assistant:</strong> Nutrition, and Food for Sport<sup>1</sup></li>
-          <li><strong>Employee Wellness Program Assistant Program Coordinator:</strong> Directed and managed university's employee wellness program including open gym hours, fitness testing, and managing exercise classes<sup>4</sup></li>
-        </ul>
-        <ol class="notes">
-          <li>Marking/Grading</li>
-          <li>Aiding in course teaching</li>
-          <li>Full course instructor and/or creator</li>
-          <li>Involves mentorship of 1 or more undergraduate students</li>
-        </ol>
-      </article>
-    </div>
-  </section>
-
-  <section id="contact" class="contact">
-    <div class="section-head">
+      <p>Pick a goal, choose your consultation, and temper your plan with the add-ons that fit your life.</p>
+      <span class="path-go">Build your plan →</span>
+    </a>
+    <a class="path" href="/about/">
+      <p class="eyebrow">The Forgemaster</p>
+      <h2>Science in the Fire</h2>
+      <p>Meet Adam, an evidence-based exercise performance and nutrition coach and researcher.</p>
+      <span class="path-go">Meet Adam →</span>
+    </a>
+    <a class="path" href="/contact/">
       <p class="eyebrow">Contact</p>
       <h2>Strike while the iron is hot</h2>
-      <p>Questions, comments, or ready to begin? Send a message and you'll hear back soon.</p>
-    </div>
-
-    <div class="contact-grid">
-      <form class="contact-form" id="contact-form">
-        <label>Name <input name="name" required autocomplete="name"></label>
-        <label>Email <input name="email" type="email" required autocomplete="email"></label>
-        <label>Message <textarea name="message" rows="6" required id="message"></textarea></label>
-        <button class="btn btn-fire" type="submit">Send message</button>
-        <p class="form-note">This opens your email app with the message ready to send.</p>
-      </form>
-
-      <div class="contact-side">
-        <div class="card">
-          <h3>Email</h3>
-          <p><a class="email-link" href="mailto:information.fitness.forge@gmail.com">information.fitness.forge@gmail.com</a></p>
-        </div>
-        <div class="card">
-          <h3>Where we train</h3>
-          <p>PERFORM Centre, Concordia University, Loyola Campus<br>7200 Sherbrooke St. W.<br>Montréal, QC H4B 1R6</p>
-          <p class="map-link"><a href="https://www.google.com/maps/search/?api=1&amp;query=PERFORM+Centre+Concordia+7200+Sherbrooke+St+W+Montreal+QC+H4B+1R6" target="_blank" rel="noopener">Open in Google Maps →</a></p>
-        </div>
-      </div>
-    </div>
+      <p>Questions, comments, or ready to begin? Send Adam an email.</p>
+      <span class="path-go">Get in touch →</span>
+    </a>
   </section>
 
 </main>
 
 <footer class="footer">
-  <p>© <span id="year"></span> Fitness Forge</p>
+  <p>© <span class="year"></span> Fitness Forge</p>
   <details class="credits">
     <summary>Photo credits</summary>
     <ul>
@@ -168,6 +74,6 @@
   </details>
 </footer>
 
-<script src="forge.js"></script>
+<script src="/site.js"></script>
 </body>
 </html>
