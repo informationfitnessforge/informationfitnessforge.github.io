@@ -8,6 +8,8 @@ Static site for Fitness Forge, hosted on GitHub Pages from `main` (repo `informa
 - `forge.js`: the goals, consultations, add-ons and prices (edit `GOALS` / `ADDONS` to change offerings)
 - `site.js`: footer year and current-page highlight in the menu
 - `styles.css`: styles
+
+When you change `styles.css`, `site.js` or `forge.js`, bump the `?v=` number on their links in every page. GitHub Pages lets browsers cache files for 10 minutes, so without it a visitor can get a new page with an old script.
 - `CNAME`: custom domain for GitHub Pages
 
 ## Photos
