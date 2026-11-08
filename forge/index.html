@@ -54,8 +54,24 @@
         <h3>Your forge</h3>
         <ul id="summary-list"></ul>
         <p class="summary-promo">New clients: <strong>$25 off</strong> your first consultation.</p>
-        <a class="btn btn-fire" id="request" href="#">Email this plan</a>
-        <p class="summary-note">Opens your email app with your plan written out for Adam.</p>
+        <button class="btn btn-fire" id="request" type="button">Write my email</button>
+        <p class="summary-note">Writes an email with your plan that you can copy and send to Adam.</p>
+
+        <div class="draft" id="draft" hidden>
+          <div class="draft-field">
+            <span class="draft-label">To</span>
+            <span class="draft-value" id="draft-to"></span>
+            <button class="copy" type="button" data-copy="draft-to">Copy</button>
+          </div>
+          <div class="draft-field">
+            <span class="draft-label">Subject</span>
+            <span class="draft-value" id="draft-subject"></span>
+            <button class="copy" type="button" data-copy="draft-subject">Copy</button>
+          </div>
+          <label class="draft-label" for="draft-body">Message <span>(add a bit about yourself)</span></label>
+          <textarea id="draft-body" rows="9"></textarea>
+          <button class="copy copy-wide" type="button" data-copy="draft-body">Copy message</button>
+        </div>
       </aside>
     </div>
   </section>

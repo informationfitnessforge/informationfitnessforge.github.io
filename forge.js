@@ -189,6 +189,8 @@ function renderSummary() {
   else items.push('<li class="empty"><span>Choose a consultation</span><span></span></li>');
   chosen.forEach((key) => items.push(`<li><span>${ADDONS[key].name}</span><span>${ADDONS[key].price}</span></li>`));
   $('#summary-list').innerHTML = items.join('');
+  // A changed plan means the written email is out of date; hide it until they write it again.
+  $('#draft').hidden = true;
   $('#request').classList.toggle('disabled', !chosenConsult);
   $('#request').setAttribute('aria-disabled', !chosenConsult);
   steps.forEach((s, i) => s.classList.toggle('on', i === 0 || (i === 1 && !!goal) || (i === 2 && !!chosenConsult)));
@@ -216,15 +218,45 @@ $('#addons').addEventListener('click', (e) => {
   renderSummary();
 });
 
-// "Email this plan" opens the visitor's email app with the plan written out.
-$('#request').addEventListener('click', (e) => {
-  e.preventDefault();
-  if (!chosenConsult) return;
+// "Write my email" shows a ready-to-copy email on the page instead of opening an email app.
+function writeDraft() {
   const lines = [`Hi Adam! I'd like to book: ${goal.name}`, `- ${chosenConsult.name} (${priceLabel(chosenConsult)})`];
   chosen.forEach((key) => lines.push(`- ${ADDONS[key].name} (${ADDONS[key].price})`));
   lines.push('', 'A bit about me and my goals:', '');
-  const subject = `Fitness Forge: ${goal.name}`;
-  window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
+  $('#draft-to').textContent = EMAIL;
+  $('#draft-subject').textContent = `Fitness Forge: ${goal.name}`;
+  $('#draft-body').value = lines.join('\n');
+}
+
+$('#request').addEventListener('click', () => {
+  if (!chosenConsult) return;
+  writeDraft();
+  $('#draft').hidden = false;
+  const body = $('#draft-body');
+  body.focus();
+  body.setSelectionRange(body.value.length, body.value.length);
+});
+
+$('#draft').addEventListener('click', async (e) => {
+  const btn = e.target.closest('.copy');
+  if (!btn) return;
+  const el = document.getElementById(btn.dataset.copy);
+  const text = el.value !== undefined ? el.value : el.textContent;
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch {
+    // Older browsers: select the text so it can be copied by hand.
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    getSelection().removeAllRanges();
+    getSelection().addRange(range);
+    if (el.select) el.select();
+    document.execCommand('copy');
+  }
+  const label = btn.textContent;
+  btn.textContent = 'Copied!';
+  btn.classList.add('done');
+  setTimeout(() => { btn.textContent = label; btn.classList.remove('done'); }, 1500);
 });
 
 renderGoals();
