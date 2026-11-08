@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=3">
+  <link rel="stylesheet" href="/styles.css?v=4">
 </head>
 <body>
 
@@ -18,6 +18,7 @@
   <nav>
     <a href="/forge/">The Forge</a>
     <a href="/about/">About</a>
+    <a href="/testimonials/">Testimonials</a>
     <a href="/contact/">Contact</a>
   </nav>
 </header>
@@ -46,16 +47,19 @@
         <h2 class="block-title">Choose your consultation</h2>
         <div class="options" id="consults" role="radiogroup" aria-label="Consultations"></div>
 
-        <h2 class="block-title">Temper it with add-ons</h2>
-        <p class="addons-hint">Optional. Tap to add them to your forge.</p>
-        <div class="addons" id="addons"></div>
+        <div id="addons-block" hidden>
+          <h2 class="block-title">Temper it with add-ons</h2>
+          <p class="addons-hint">Tap to add them to your forge, or choose None.</p>
+          <div class="addons" id="addons"></div>
+        </div>
       </div>
       <aside class="summary" aria-live="polite">
         <h3>Your forge</h3>
         <ul id="summary-list"></ul>
+        <div class="tally" id="tally" hidden></div>
         <p class="summary-promo">New clients: <strong>$25 off</strong> your first consultation.</p>
-        <button class="btn btn-fire" id="request" type="button">Write my email</button>
-        <p class="summary-note">Writes an email with your plan that you can copy and send to Adam.</p>
+        <button class="btn btn-fire" id="request" type="button">Send Word to the Forge</button>
+        <p class="summary-note">Writes an email with your plan that you can copy and send to the Forge.</p>
 
         <div class="draft" id="draft" hidden>
           <div class="draft-field">
@@ -83,15 +87,14 @@
   <details class="credits">
     <summary>Photo credits</summary>
     <ul>
-      <li>Bonfire and meal-planning photos by <a href="https://www.flickr.com/people/shixart1985/">Nenad Stojkovic</a>, <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, via Wikimedia Commons</li>
-      <li>Kettlebell workout by Rafaelqcn, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>, via Wikimedia Commons</li>
+      <li>Bonfire, meal-planning and dumbbell-with-fruit photos by <a href="https://www.flickr.com/people/shixart1985/">Nenad Stojkovic</a>, <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, via Wikimedia Commons</li>
       <li>Blacksmith's fire by David Whelan, <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>, via Wikimedia Commons</li>
       <li>Spin class and dumbbell rack photos by the U.S. Army and U.S. Marine Corps, public domain, via Wikimedia Commons</li>
     </ul>
   </details>
 </footer>
 
-<script src="/site.js?v=3"></script>
-<script src="/forge.js?v=3"></script>
+<script src="/site.js?v=4"></script>
+<script src="/forge.js?v=4"></script>
 </body>
 </html>

@@ -1,34 +1,49 @@
-// The Forge: pick a goal, choose a consultation, add extras, then email the plan.
+// The Forge: pick a goal, choose a consultation, add extras, then write an email with the plan.
 
 const EMAIL = 'information.fitness.forge@gmail.com';
 
 // Wording is Adam's own, from FitnessForge v2.
 const ADDONS = {
+  none: {
+    name: 'None',
+    price: '+$0',
+    cost: { min: 0, max: 0 },
+    lore: 'The metal is ready as it is; let the consultation alone shape it.',
+    text: 'No add-ons. Just the consultation.',
+  },
   flame: {
     name: 'Constant Flame',
     price: '+$10 / week',
+    cost: { min: 10, max: 10, every: 'week' },
     lore: 'Continual heat to persuade any metal to be shaped according to its intended purpose.',
     text: 'Weekly accountability, progress tracking or updates: weekly email check-ins of quick phone calls (under 15 minutes).',
   },
   training: {
     name: 'Personal Forge Training',
     price: '+$20 / session',
+    cost: { min: 20, max: 20 },
     lore: 'Experience guided demonstrations for crafting your goals by the hands of an expert craftsman.',
     text: 'Additional personal training session for exercise demonstration and technique critique to complement your consult; 15-30 minute extended consult, virtual or in person at limited locations.',
-  },
-  access: {
-    name: 'Forgemaster Access',
-    price: '+$250 / month',
-    lore: 'Gain access to the foremost sculpting and crafting knowledge in all the lands, directly in the palm of your hands.',
-    text: 'Instant messaging for quick advice, support or feedback on your current plan to support serious goals; guaranteed responses within 1-2 hours, 8am to 8pm.',
   },
   testing: {
     name: 'Testing the Fire',
     price: '+$50-150 / assessment',
+    cost: { min: 50, max: 150 },
     lore: 'Assessment of skills in the forge and judgement by the wisest of masters.',
     text: 'Additional performance testing session to complement your consult; 15-30 minute extended consult, virtual or in person at limited locations.',
   },
+  access: {
+    name: 'Forgemaster Access',
+    price: '+$250 / month',
+    cost: { min: 250, max: 250, every: 'month' },
+    lore: 'Gain access to the foremost sculpting and crafting knowledge in all the lands, directly in the palm of your hands.',
+    text: 'Instant messaging for quick advice, support or feedback on your current plan to support serious goals; guaranteed responses within 1-2 hours, 8am to 8pm.',
+  },
 };
+
+// Shown lowest to highest cost, whatever order a goal lists them in.
+const ADDON_ORDER = Object.keys(ADDONS);
+const DISCOUNT = 25;
 
 const LORE = {
   quick: 'Appeal to the Forgemaster for advice from afar, learning the tips and tricks of the craft.',
@@ -83,8 +98,8 @@ const GOALS = [
     name: 'Forge the Ultimate Work of Art',
     lore: 'The best tool is one that is pieced together in the hottest flames, crafted of the strongest materials, and carved with expert precision.',
     blurb: 'Combine skills from cardiovascular training, building muscle, and managing weight for an integrated approach to achieving the best version of you!',
-    img: '/assets/goal-multi.jpg',
-    alt: 'A man pressing a kettlebell overhead in a gym',
+    img: '/assets/goal-mixed.jpg',
+    alt: 'A hand lifting a dumbbell over a spread of fresh fruit',
     consults: [
       consult('quick', 'Quick Advice', '45 minutes', 75, true,
         'Forty-five-minute session covering basic knowledge and planning for achieving your goal!'),
@@ -115,13 +130,15 @@ const GOALS = [
 const $ = (sel) => document.querySelector(sel);
 const goalsEl = $('#goals');
 const anvil = $('#anvil');
+const addonsBlock = $('#addons-block');
 const steps = document.querySelectorAll('.steps li');
 
 let goal = null;
 let chosenConsult = null;
 const chosen = new Set();
 
-const priceLabel = (c) => (c.from ? `from $${c.price}` : `$${c.price}`);
+const priceLabel = (c) => (c.from ? `starting at $${c.price}` : `$${c.price}`);
+const money = (min, max) => (min === max ? `$${min}` : `$${min}-${max}`);
 
 function renderGoals() {
   goalsEl.innerHTML = GOALS.map((g) => `
@@ -129,7 +146,7 @@ function renderGoals() {
       <img src="${g.img}" alt="${g.alt}" loading="lazy">
       <span class="goal-body">
         <span class="goal-name">${g.name}</span>
-        <span class="goal-blurb">${g.blurb}</span>
+        <span class="goal-blurb">${g.lore}</span>
       </span>
     </button>`).join('');
   goalsEl.addEventListener('click', (e) => {
@@ -161,7 +178,8 @@ function selectGoal(id) {
       <span class="option-text">${c.text}</span>
     </button>`).join('');
 
-  $('#addons').innerHTML = goal.addons.map((key, i) => {
+  const keys = ADDON_ORDER.filter((key) => key === 'none' || goal.addons.includes(key));
+  $('#addons').innerHTML = keys.map((key, i) => {
     const a = ADDONS[key];
     return `
       <button class="addon" aria-pressed="false" data-key="${key}" style="--i:${i}">
@@ -170,6 +188,8 @@ function selectGoal(id) {
         <span class="addon-text">${a.text}</span>
       </button>`;
   }).join('');
+  // Add-ons only appear once a consultation is chosen.
+  addonsBlock.hidden = true;
 
   anvil.hidden = false;
   // Restart the reveal animation each time a new goal is chosen.
@@ -183,12 +203,47 @@ function selectGoal(id) {
   }
 }
 
+// One-time costs add up to the total; weekly and monthly add-ons are listed under it.
+function totals() {
+  let min = chosenConsult.price;
+  let max = chosenConsult.price;
+  let estimate = chosenConsult.from;
+  const ongoing = [];
+  chosen.forEach((key) => {
+    const { name, cost } = ADDONS[key];
+    if (cost.every) ongoing.push(`$${cost.min} / ${cost.every} (${name})`);
+    else { min += cost.min; max += cost.max; }
+    if (cost.min !== cost.max) estimate = true;
+  });
+  return {
+    estimate,
+    subtotal: money(min, max),
+    total: money(Math.max(min - DISCOUNT, 0), Math.max(max - DISCOUNT, 0)),
+    ongoing,
+  };
+}
+
 function renderSummary() {
   const items = [];
   if (chosenConsult) items.push(`<li><span>${chosenConsult.name}</span><span>${priceLabel(chosenConsult)}</span></li>`);
   else items.push('<li class="empty"><span>Choose a consultation</span><span></span></li>');
   chosen.forEach((key) => items.push(`<li><span>${ADDONS[key].name}</span><span>${ADDONS[key].price}</span></li>`));
   $('#summary-list').innerHTML = items.join('');
+
+  const tally = $('#tally');
+  if (chosenConsult) {
+    const t = totals();
+    tally.innerHTML = `
+      <div><span>Subtotal</span><span>${t.subtotal}</span></div>
+      <div class="tally-discount"><span>New client discount</span><span>-$${DISCOUNT}</span></div>
+      <div class="tally-total"><span>${t.estimate ? 'Estimated total' : 'Total'}</span><span>${t.total}</span></div>
+      ${t.ongoing.length ? `<p class="tally-note">Plus ${t.ongoing.join(' and ')}</p>` : ''}
+      ${t.estimate ? '<p class="tally-note">Prices marked "starting at" can change once your plan is set.</p>' : ''}`;
+    tally.hidden = false;
+  } else {
+    tally.hidden = true;
+  }
+
   // A changed plan means the written email is out of date; hide it until they write it again.
   $('#draft').hidden = true;
   $('#request').classList.toggle('disabled', !chosenConsult);
@@ -205,6 +260,12 @@ $('#consults').addEventListener('click', (e) => {
     b.classList.toggle('on', on);
     b.setAttribute('aria-checked', on);
   });
+  if (addonsBlock.hidden) {
+    addonsBlock.hidden = false;
+    addonsBlock.classList.remove('lit');
+    void addonsBlock.offsetWidth;
+    addonsBlock.classList.add('lit');
+  }
   renderSummary();
 });
 
@@ -212,19 +273,30 @@ $('#addons').addEventListener('click', (e) => {
   const btn = e.target.closest('.addon');
   if (!btn) return;
   const key = btn.dataset.key;
-  if (chosen.has(key)) chosen.delete(key); else chosen.add(key);
-  btn.classList.toggle('on', chosen.has(key));
-  btn.setAttribute('aria-pressed', chosen.has(key));
+  if (chosen.has(key)) chosen.delete(key);
+  else {
+    // "None" and the paid add-ons rule each other out.
+    if (key === 'none') chosen.clear(); else chosen.delete('none');
+    chosen.add(key);
+  }
+  $('#addons').querySelectorAll('.addon').forEach((b) => {
+    const on = chosen.has(b.dataset.key);
+    b.classList.toggle('on', on);
+    b.setAttribute('aria-pressed', on);
+  });
   renderSummary();
 });
 
-// "Write my email" shows a ready-to-copy email on the page instead of opening an email app.
+// "Send Word to the Forge" shows a ready-to-copy email on the page instead of opening an email app.
 function writeDraft() {
-  const lines = [`Hi Adam! I'd like to book: ${goal.name}`, `- ${chosenConsult.name} (${priceLabel(chosenConsult)})`];
-  chosen.forEach((key) => lines.push(`- ${ADDONS[key].name} (${ADDONS[key].price})`));
+  const lines = [`Hi Forgemaster! I'd like to book: ${goal.name}`, `- ${chosenConsult.name} (${priceLabel(chosenConsult)})`];
+  chosen.forEach((key) => lines.push(key === 'none' ? '- No add-ons' : `- ${ADDONS[key].name} (${ADDONS[key].price})`));
+  const t = totals();
+  lines.push(`${t.estimate ? 'Estimated total' : 'Total'} with the new client discount: ${t.total}`);
+  if (t.ongoing.length) lines.push(`Plus ${t.ongoing.join(' and ')}`);
   lines.push('', 'A bit about me and my goals:', '');
   $('#draft-to').textContent = EMAIL;
-  $('#draft-subject').textContent = `Fitness Forge: ${goal.name}`;
+  $('#draft-subject').textContent = 'Forge Interest';
   $('#draft-body').value = lines.join('\n');
 }
 

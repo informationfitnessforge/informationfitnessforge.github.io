@@ -4,7 +4,7 @@ Static site for Fitness Forge, hosted on GitHub Pages from `main` (repo `informa
 
 - `index.html`: home page
 - `forge/`, `about/`, `contact/`: the other pages (each repeats the shared header and footer)
-- `testimonials/`: template layout with placeholder content; not linked from the menu
+- `testimonials/`: template layout with placeholder content (replace with real quotes)
 - `forge.js`: the goals, consultations, add-ons and prices (edit `GOALS` / `ADDONS` to change offerings)
 - `site.js`: footer year and current-page highlight in the menu
 - `styles.css`: styles
@@ -22,5 +22,5 @@ All openly licensed via Wikimedia Commons (credited in the site footer):
 | `goal-weight.jpg` | [Healthy meal planning with fresh fruits and vegetables](https://commons.wikimedia.org/wiki/File:Healthy_meal_planning_with_fresh_fruits_and_vegetables_in_a_bright_kitchen_setting.jpg), Nenad Stojkovic | CC BY 2.0 |
 | `goal-cardio.jpg` | [Ederle Gym Spin Cycle Class Photo 1](https://commons.wikimedia.org/wiki/File:Ederle_Gym_Spin_Cycle_Class_Photo_1_(6382546).jpg), Pfc. Trinity Carter, U.S. Army | Public domain |
 | `goal-strength.jpg` | [Marines' voices echo, prompt new gym hours](https://commons.wikimedia.org/wiki/File:Marines%27_voices_echo,_prompt_new_gym_hours_150927-M-AI083-067.jpg), Lance Cpl. Jason Jimenez, USMC | Public domain |
-| `goal-multi.jpg` | [Kettlebell workout](https://commons.wikimedia.org/wiki/File:Kettlebell_workout.jpg), Rafaelqcn | CC BY-SA 4.0 |
+| `goal-mixed.jpg` | [Healthy lifestyle focus with weights and fresh fruits on a kitchen countertop](https://commons.wikimedia.org/wiki/File:Healthy_lifestyle_focus_with_weights_and_fresh_fruits_on_a_kitchen_countertop.jpg), Nenad Stojkovic | CC BY 2.0 |
 | `goal-other.jpg` | [Blacksmith's fire](https://commons.wikimedia.org/wiki/File:Blacksmith%27s_fire_(30148481152).jpg), David Whelan | CC0 |
