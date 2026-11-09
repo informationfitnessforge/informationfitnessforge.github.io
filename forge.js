@@ -52,11 +52,11 @@ const LORE = {
 const consult = (id, name, length, price, from, text) => ({ id, name, length, price, from, lore: LORE[id], text });
 
 const STANDARD = [
-  consult('quick', 'Quick Advice', '30 minutes', 45, true,
+  consult('quick', 'Quick Consult', '30 minutes', 45, true,
     'Thirty-minute session covering basic knowledge and planning for achieving your goal!'),
-  consult('learner', 'Learner Consult', 'One hour', 100, true,
+  consult('learner', 'Standard Consult', 'One hour', 100, true,
     'One-hour session covering knowledge, exploring modes of action, and creating personalized designs for achieving your goal!'),
-  consult('apprentice', 'Extended Apprenticeship', 'One month: four weekly one-hour sessions', 375, true,
+  consult('apprentice', 'Extended Consults', 'One month: four weekly one-hour sessions', 375, true,
     'Four weekly one-hour sessions for knowledge endowment, actionable plans, tailored strategies, and regular readjustments to achieving your goal!'),
 ];
 
@@ -99,11 +99,11 @@ const GOALS = [
     img: '/assets/goal-shake.jpg',
     alt: 'A man sitting in a gym after a workout, scooping protein into his shaker',
     consults: [
-      consult('quick', 'Quick Advice', '45 minutes', 75, true,
+      consult('quick', 'Quick Consult', '45 minutes', 75, true,
         'Forty-five-minute session covering basic knowledge and planning for achieving your goal!'),
-      consult('learner', 'Learner Consult', '90 minutes', 150, true,
+      consult('learner', 'Standard Consult', '90 minutes', 150, true,
         'Ninety-minute session covering knowledge, exploring modes of action, and creating personalized designs for achieving your goal!'),
-      consult('apprentice', 'Extended Apprenticeship', 'One month: one 90-minute and three one-hour sessions', 500, true,
+      consult('apprentice', 'Extended Consults', 'One month: one 90-minute and three one-hour sessions', 500, true,
         'Weekly sessions for knowledge endowment, actionable plans, tailored strategies, and regular readjustments to achieving your goal!'),
     ],
     addons: ['flame', 'training', 'access', 'testing'],
@@ -116,9 +116,9 @@ const GOALS = [
     img: '/assets/goal-other.jpg',
     alt: "Coal glowing white-hot in a blacksmith's forge",
     consults: [
-      consult('quick', 'Quick Advice', '30 minutes', 60, false,
+      consult('quick', 'Quick Consult', '30 minutes', 60, false,
         'Thirty-minute session covering basic knowledge and planning for achieving your goal!'),
-      consult('learner', 'Learner Consult', '45 minutes', 75, false,
+      consult('learner', 'Standard Consult', '45 minutes', 75, false,
         'Forty-five-minute session covering knowledge, exploring modes of action, and creating personalized designs for achieving your goal!'),
     ],
     addons: ['flame', 'access'],
