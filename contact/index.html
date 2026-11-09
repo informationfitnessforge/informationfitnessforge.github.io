@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=7">
+  <link rel="stylesheet" href="/styles.css?v=9">
 </head>
 <body>
 
@@ -29,14 +29,28 @@
     <div class="section-head">
       <p class="eyebrow">Contact</p>
       <h1>Strike while the iron is hot</h1>
-      <p>Questions, comments, or ready to begin? Send an email and you'll hear back soon.</p>
+      <p>Questions, comments, or ready to begin? Send a message and you'll hear back soon.</p>
     </div>
 
-    <div class="email-card">
-      <p class="eyebrow">Email</p>
-      <a class="email-big" href="mailto:information.fitness.forge@gmail.com">information.fitness.forge@gmail.com</a>
-      <p>Already know what you want? <a href="/forge/">Build your plan in the Forge</a> and send it to the Forge in one click.</p>
+    <div class="message-card">
+      <form class="send ready" id="message" novalidate>
+        <label class="field-label" for="message-name">Your name</label>
+        <input id="message-name" type="text" autocomplete="name" required>
+        <label class="field-label" for="message-email">Your email <span>(so the Forgemaster can reply)</span></label>
+        <input id="message-email" type="email" autocomplete="email" required>
+        <label class="field-label" for="message-text">Your message</label>
+        <textarea id="message-text" rows="6" required></textarea>
+        <input class="trap" type="checkbox" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn btn-fire" id="message-send" type="submit">Send message</button>
+        <p class="summary-note" id="message-status" role="status"></p>
+      </form>
+      <div class="sent" id="message-sent" hidden tabindex="-1">
+        <p class="sent-title">Your message has reached the Forge</p>
+        <p>The Forgemaster will reply to <strong id="message-sent-email"></strong> soon.</p>
+      </div>
     </div>
+
+    <p class="message-tip">Already know what you want? <a href="/forge/">Build your plan in the Forge</a> and send it in one click.</p>
   </section>
 
 </main>
@@ -53,6 +67,7 @@
   </details>
 </footer>
 
-<script src="/site.js?v=7"></script>
+<script src="/site.js?v=9"></script>
+<script src="/contact.js?v=9"></script>
 </body>
 </html>

@@ -1,7 +1,5 @@
 // The Forge: pick a goal, choose a consultation, add extras, then send the plan to the Forge.
 
-const EMAIL = 'information.fitness.forge@gmail.com';
-
 // Wording is Adam's own, from FitnessForge v2.
 const ADDONS = {
   none: {
@@ -345,7 +343,7 @@ form.addEventListener('submit', async (e) => {
     $('#sent').hidden = false;
     $('#sent').focus();
   } catch {
-    setStatus(`That didn't go through. Please try again, or email <a href="mailto:${EMAIL}">${EMAIL}</a>.`, true);
+    setStatus("That didn't go through. Please try again in a moment, or <a href=\"/contact/\">send a message</a> instead.", true);
   } finally {
     button.disabled = false;
     button.textContent = 'Send Word to the Forge';

@@ -355,18 +355,13 @@ section { padding: clamp(64px, 10vw, 120px) clamp(16px, 6vw, 80px); }
 
 /* Contact */
 .contact { background: radial-gradient(ellipse at 50% 100%, #2a160b 0%, var(--bg) 65%); }
-.email-card {
-  max-width: 720px; margin: 0 auto; text-align: center;
-  padding: clamp(1.6rem, 5vw, 2.6rem); border-radius: 16px;
+.message-card {
+  max-width: 600px; margin: 0 auto;
+  padding: clamp(1.4rem, 5vw, 2.2rem); border-radius: 16px;
   background: var(--card); border: 1px solid var(--line); box-shadow: var(--glow);
 }
-.email-big {
-  display: inline-block; margin: .2rem 0 1rem;
-  font: 600 clamp(1.05rem, 3.6vw, 1.6rem) var(--sans); color: var(--fire-2);
-  text-decoration: none; word-break: break-word;
-}
-.email-big:hover { text-decoration: underline; }
-.email-card p:not(.eyebrow) { margin: 0; color: var(--muted); }
+.message-card .sent { border: 0; background: none; padding: .5rem 0; }
+.message-tip { margin: 1.4rem auto 0; max-width: 600px; text-align: center; color: var(--muted); font-size: .92rem; }
 
 /* Testimonials (template) */
 .template-banner {
@@ -413,7 +408,6 @@ section { padding: clamp(64px, 10vw, 120px) clamp(16px, 6vw, 80px); }
 .quote-feature figcaption { align-items: center; text-align: center; }
 .quote-feature figcaption strong { font: 700 1.1rem var(--serif); color: var(--fire-2); }
 .quote-cta { margin: 2.4rem auto 0; text-align: center; }
-.quote-cta p { margin: 1rem 0 0; color: var(--muted); font-size: .92rem; }
 
 /* Footer */
 .footer {

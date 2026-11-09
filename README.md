@@ -7,6 +7,7 @@ Static site for Fitness Forge, hosted on GitHub Pages from `main` (repo `informa
 - `testimonials/`: client testimonials; one featured quote for now (`.quote-feature`), switch to the `.quotes` grid once there are several
 - `forge.js`: the goals, consultations, add-ons and prices (edit `GOALS` / `ADDONS` to change offerings), and the "Send Word to the Forge" form, which sends through Web3Forms (free; key in `FORM_KEY`, set up under information.fitness.forge@gmail.com)
 - `site.js`: footer year and current-page highlight in the menu
+- `contact.js`: the Contact page message form (also sends through Web3Forms)
 - `styles.css`: styles
 
 When you change `styles.css`, `site.js` or `forge.js`, bump the `?v=` number on their links in every page. GitHub Pages lets browsers cache files for 10 minutes, so without it a visitor can get a new page with an old script.
