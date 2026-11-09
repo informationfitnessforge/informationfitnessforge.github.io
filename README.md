@@ -15,13 +15,14 @@ When you change `styles.css`, `site.js` or `forge.js`, bump the `?v=` number on 
 
 ## Photos
 
-All openly licensed via Wikimedia Commons (credited in the site footer):
+Free to use: openly licensed via Wikimedia Commons, or under the Unsplash / Pexels licenses (all credited in the site footer):
 
 | File | Source | License |
 |---|---|---|
 | `hero-fire.jpg` | [Closeup of raging flames in a large bonfire](https://commons.wikimedia.org/wiki/File:Closeup_of_raging_flames_in_a_large_bonfire._-_Flickr_-_shixart1985.jpg), Nenad Stojkovic | CC BY 2.0 |
 | `goal-weight.jpg` | [Healthy meal planning with fresh fruits and vegetables](https://commons.wikimedia.org/wiki/File:Healthy_meal_planning_with_fresh_fruits_and_vegetables_in_a_bright_kitchen_setting.jpg), Nenad Stojkovic | CC BY 2.0 |
-| `goal-cardio.jpg` | [Ederle Gym Spin Cycle Class Photo 1](https://commons.wikimedia.org/wiki/File:Ederle_Gym_Spin_Cycle_Class_Photo_1_(6382546).jpg), Pfc. Trinity Carter, U.S. Army | Public domain |
+| `goal-run.jpg` | [Woman running in golden hour light](https://unsplash.com/photos/woman-running-in-golden-hour-light-a6FHROHuQ9o), McCarthy Beckan | Unsplash License |
 | `goal-strength.jpg` | [Marines' voices echo, prompt new gym hours](https://commons.wikimedia.org/wiki/File:Marines%27_voices_echo,_prompt_new_gym_hours_150927-M-AI083-067.jpg), Lance Cpl. Jason Jimenez, USMC | Public domain |
-| `goal-mixed.jpg` | [Healthy lifestyle focus with weights and fresh fruits on a kitchen countertop](https://commons.wikimedia.org/wiki/File:Healthy_lifestyle_focus_with_weights_and_fresh_fruits_on_a_kitchen_countertop.jpg), Nenad Stojkovic | CC BY 2.0 |
+| `goal-meal.jpg` | [Woman eating healthy food](https://www.pexels.com/photo/woman-eating-healthy-food-6740512/), Mikhail Nilov | Pexels License |
 | `goal-other.jpg` | [Blacksmith's fire](https://commons.wikimedia.org/wiki/File:Blacksmith%27s_fire_(30148481152).jpg), David Whelan | CC0 |
+| `about-anvil.jpg` | [Vintage smith's workshop - 0158](https://commons.wikimedia.org/wiki/File:Vintage_smith%27s_workshop_-_0158.jpg), Jorge Royan | CC BY-SA 3.0 |

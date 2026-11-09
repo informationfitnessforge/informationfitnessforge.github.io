@@ -93,14 +93,13 @@ h3 { font-size: 1.25rem; }
 .hero-text { max-width: 620px; }
 .hero h1 { font-size: clamp(2.3rem, 6vw, 4.2rem); text-shadow: 0 2px 30px rgba(0, 0, 0, .6); }
 .hero-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-top: 2rem; }
+/* Information, not a button: no outline or fill, just a small flame and highlighted text */
 .promo-pill {
-  border: 1px solid rgba(255, 179, 71, .5);
-  border-radius: 999px;
-  padding: .55rem 1.1rem;
-  font-size: .92rem;
-  color: var(--fire-2);
-  background: rgba(20, 10, 4, .55);
+  font-size: .95rem; color: var(--muted);
+  text-shadow: 0 1px 12px rgba(0, 0, 0, .8);
 }
+.promo-pill::before { content: '\1F525'; font-size: 1rem; margin-right: .4rem; }
+.promo-pill strong { color: var(--fire-2); }
 .embers { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
 .embers::before, .embers::after {
   content: ''; position: absolute; left: 0; right: 0; bottom: -10%; height: 120%;
@@ -307,8 +306,20 @@ section { padding: clamp(64px, 10vw, 120px) clamp(16px, 6vw, 80px); }
 .tally-note { margin: 0; font-size: .78rem; color: var(--muted); }
 #addons-block.lit .block-title, #addons-block.lit .addons-hint { animation: heat .6s ease-out both; }
 #addons-block.lit .addon { animation: strike .5s ease-out both; animation-delay: calc(.15s + var(--i) * .08s); }
-.summary-promo { font-size: .88rem; color: var(--muted); margin: 0 0 1.2rem; }
-.summary-promo strong { color: var(--fire-2); }
+/* First time / Returning switch */
+.client-type { border: 0; padding: 0; margin: 0 0 .9rem; display: grid; grid-template-columns: 1fr 1fr; gap: .4rem; }
+.client-type legend { padding: 0; margin-bottom: .45rem; font-size: .82rem; color: var(--muted); }
+.client-type label { position: relative; cursor: pointer; }
+.client-type input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.client-type span {
+  display: block; padding: .5rem .4rem; border-radius: 8px; text-align: center;
+  border: 1px solid var(--line); background: var(--bg-2); font-size: .86rem; font-weight: 600;
+  transition: border-color .15s, background .15s, color .15s;
+}
+.client-type small { display: block; font-weight: 500; font-size: .72rem; color: var(--fire-2); }
+.client-type label:hover span { border-color: var(--fire); }
+.client-type input:checked + span { border-color: var(--fire); background: #26150b; color: var(--fire-2); box-shadow: 0 0 12px rgba(255, 122, 26, .2); }
+.client-type input:focus-visible + span { outline: 2px solid var(--fire-2); outline-offset: 2px; }
 .summary .btn { width: 100%; text-align: center; }
 .btn.disabled { opacity: .45; box-shadow: none; }
 .btn.disabled:hover { transform: none; }

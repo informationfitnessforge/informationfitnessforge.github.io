@@ -86,8 +86,8 @@ const GOALS = [
     name: 'Upgrade the Furnace that Fuels',
     lore: 'Only the strongest of flames can forge the sharpest of blades within the heart of the furnace.',
     blurb: 'Use the best tools to improve cardiovascular health by training the most important muscle of the body, the heart, keeping the body’s furnace burning strong and ensuring you feel as fit as possible!',
-    img: '/assets/goal-cardio.jpg',
-    alt: 'Silhouettes of people riding bikes in a spin class',
+    img: '/assets/goal-run.jpg',
+    alt: 'A woman running along a path in golden evening light',
     consults: STANDARD,
     addons: ['flame', 'training', 'access', 'testing'],
   },
@@ -96,8 +96,8 @@ const GOALS = [
     name: 'Forge the Ultimate Work of Art',
     lore: 'The best tool is one that is pieced together in the hottest flames, crafted of the strongest materials, and carved with expert precision.',
     blurb: 'Combine skills from cardiovascular training, building muscle, and managing weight for an integrated approach to achieving the best version of you!',
-    img: '/assets/goal-mixed.jpg',
-    alt: 'A hand lifting a dumbbell over a spread of fresh fruit',
+    img: '/assets/goal-meal.jpg',
+    alt: 'A woman in workout clothes eating a healthy salad on a mat in a home gym',
     consults: [
       consult('quick', 'Quick Advice', '45 minutes', 75, true,
         'Forty-five-minute session covering basic knowledge and planning for achieving your goal!'),
@@ -134,6 +134,8 @@ const steps = document.querySelectorAll('.steps li');
 let goal = null;
 let chosenConsult = null;
 const chosen = new Set();
+// First-time clients get $25 off their first consultation; returning clients pay full price.
+const isFirstTime = () => document.querySelector('input[name="client"]:checked').value === 'new';
 
 const priceLabel = (c) => (c.from ? `starting at $${c.price}` : `$${c.price}`);
 const money = (min, max) => (min === max ? `$${min}` : `$${min}-${max}`);
@@ -213,10 +215,12 @@ function totals() {
     else { min += cost.min; max += cost.max; }
     if (cost.min !== cost.max) estimate = true;
   });
+  const off = isFirstTime() ? DISCOUNT : 0;
   return {
     estimate,
+    discount: off,
     subtotal: money(min, max),
-    total: money(Math.max(min - DISCOUNT, 0), Math.max(max - DISCOUNT, 0)),
+    total: money(Math.max(min - off, 0), Math.max(max - off, 0)),
     ongoing,
   };
 }
@@ -233,8 +237,8 @@ function renderSummary() {
   if (chosenConsult) {
     const t = totals();
     tally.innerHTML = `
-      <div><span>Subtotal</span><span>${t.subtotal}</span></div>
-      <div class="tally-discount"><span>New client discount</span><span>-$${DISCOUNT}</span></div>
+      ${t.discount ? `<div><span>Subtotal</span><span>${t.subtotal}</span></div>
+      <div class="tally-discount"><span>First-time client discount</span><span>-$${t.discount}</span></div>` : ''}
       <div class="tally-total"><span>${t.estimate ? 'Estimated total' : 'Total'}</span><span>${t.total}</span></div>
       ${t.ongoing.length ? `<p class="tally-note">Plus ${t.ongoing.join(' and ')}</p>` : ''}
       ${t.estimate ? '<p class="tally-note">Prices marked "starting at" can change once your plan is set.</p>' : ''}`;
@@ -243,8 +247,6 @@ function renderSummary() {
     tally.hidden = true;
   }
 
-  // The tally already shows the discount, so the promo line is only needed before a consultation is picked.
-  $('#promo').hidden = !!chosenConsult;
   $('#send').classList.toggle('ready', !!chosenConsult);
   // The button stays dim until every step is done; clicking it early points to the missing step.
   const incomplete = !!missingStep();
@@ -259,6 +261,8 @@ function renderSummary() {
   }
   steps.forEach((s, i) => s.classList.toggle('on', i === 0 || (i === 1 && !!goal) || (i === 2 && !!chosenConsult)));
 }
+
+$('#client-type').addEventListener('change', renderSummary);
 
 $('#consults').addEventListener('click', (e) => {
   const btn = e.target.closest('.option');
@@ -304,10 +308,14 @@ const status = $('#send-status');
 const STATUS_TEXT = status.textContent;
 
 function planText() {
-  const lines = [`Goal: ${goal.name}`, `- ${chosenConsult.name} (${priceLabel(chosenConsult)})`];
-  chosen.forEach((key) => lines.push(key === 'none' ? '- No add-ons' : `- ${ADDONS[key].name} (${ADDONS[key].price})`));
   const t = totals();
-  lines.push(`${t.estimate ? 'Estimated total' : 'Total'} with the new client discount: ${t.total}`);
+  const lines = [
+    `Client: ${t.discount ? 'First time' : 'Returning'}`,
+    `Goal: ${goal.name}`,
+    `- ${chosenConsult.name} (${priceLabel(chosenConsult)})`,
+  ];
+  chosen.forEach((key) => lines.push(key === 'none' ? '- No add-ons' : `- ${ADDONS[key].name} (${ADDONS[key].price})`));
+  lines.push(`${t.estimate ? 'Estimated total' : 'Total'}${t.discount ? ' with the first-time client discount' : ''}: ${t.total}`);
   if (t.ongoing.length) lines.push(`Plus ${t.ongoing.join(' and ')}`);
   return lines.join('\n');
 }
