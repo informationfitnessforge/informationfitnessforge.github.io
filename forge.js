@@ -96,8 +96,8 @@ const GOALS = [
     name: 'Forge the Ultimate Work of Art',
     lore: 'The best tool is one that is pieced together in the hottest flames, crafted of the strongest materials, and carved with expert precision.',
     blurb: 'Combine skills from cardiovascular training, building muscle, and managing weight for an integrated approach to achieving the best version of you!',
-    img: '/assets/goal-meal.jpg',
-    alt: 'A woman in workout clothes eating a healthy salad on a mat in a home gym',
+    img: '/assets/goal-shake.jpg',
+    alt: 'A man sitting in a gym after a workout, scooping protein into his shaker',
     consults: [
       consult('quick', 'Quick Advice', '45 minutes', 75, true,
         'Forty-five-minute session covering basic knowledge and planning for achieving your goal!'),
