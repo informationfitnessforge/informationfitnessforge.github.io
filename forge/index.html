@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=4">
+  <link rel="stylesheet" href="/styles.css?v=5">
 </head>
 <body>
 
@@ -53,28 +53,28 @@
           <div class="addons" id="addons"></div>
         </div>
       </div>
-      <aside class="summary" aria-live="polite">
+      <aside class="summary">
         <h3>Your forge</h3>
         <ul id="summary-list"></ul>
         <div class="tally" id="tally" hidden></div>
-        <p class="summary-promo">New clients: <strong>$25 off</strong> your first consultation.</p>
-        <button class="btn btn-fire" id="request" type="button">Send Word to the Forge</button>
-        <p class="summary-note">Writes an email with your plan that you can copy and send to the Forge.</p>
+        <p class="summary-promo" id="promo">New clients: <strong>$25 off</strong> your first consultation.</p>
 
-        <div class="draft" id="draft" hidden>
-          <div class="draft-field">
-            <span class="draft-label">To</span>
-            <span class="draft-value" id="draft-to"></span>
-            <button class="copy" type="button" data-copy="draft-to">Copy</button>
-          </div>
-          <div class="draft-field">
-            <span class="draft-label">Subject</span>
-            <span class="draft-value" id="draft-subject"></span>
-            <button class="copy" type="button" data-copy="draft-subject">Copy</button>
-          </div>
-          <label class="draft-label" for="draft-body">Message <span>(add a bit about yourself)</span></label>
-          <textarea id="draft-body" rows="9"></textarea>
-          <button class="copy copy-wide" type="button" data-copy="draft-body">Copy message</button>
+        <form class="send" id="send" novalidate>
+          <label class="field-label" for="send-name">Your name</label>
+          <input id="send-name" name="name" type="text" autocomplete="name" required>
+          <label class="field-label" for="send-email">Your email</label>
+          <input id="send-email" name="email" type="email" autocomplete="email" required>
+          <label class="field-label" for="send-about">A bit about you and your goals <span>(optional)</span></label>
+          <textarea id="send-about" name="about" rows="4"></textarea>
+          <input class="trap" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button class="btn btn-fire" id="request" type="submit">Send Word to the Forge</button>
+          <p class="summary-note" id="send-status" role="status">Your plan is sent along with your message.</p>
+        </form>
+
+        <div class="sent" id="sent" hidden tabindex="-1">
+          <p class="sent-title">Your word has reached the Forge</p>
+          <p>The Forgemaster will reply to <strong id="sent-email"></strong> soon.</p>
+          <button class="copy copy-wide" type="button" id="send-again">Send another plan</button>
         </div>
       </aside>
     </div>
@@ -94,7 +94,7 @@
   </details>
 </footer>
 
-<script src="/site.js?v=4"></script>
-<script src="/forge.js?v=4"></script>
+<script src="/site.js?v=5"></script>
+<script src="/forge.js?v=5"></script>
 </body>
 </html>

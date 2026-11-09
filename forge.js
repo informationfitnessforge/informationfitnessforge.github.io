@@ -1,4 +1,4 @@
-// The Forge: pick a goal, choose a consultation, add extras, then write an email with the plan.
+// The Forge: pick a goal, choose a consultation, add extras, then send the plan to the Forge.
 
 const EMAIL = 'information.fitness.forge@gmail.com';
 
@@ -244,8 +244,9 @@ function renderSummary() {
     tally.hidden = true;
   }
 
-  // A changed plan means the written email is out of date; hide it until they write it again.
-  $('#draft').hidden = true;
+  // The tally already shows the discount, so the promo line is only needed before a consultation is picked.
+  $('#promo').hidden = !!chosenConsult;
+  $('#send').classList.toggle('ready', !!chosenConsult);
   $('#request').classList.toggle('disabled', !chosenConsult);
   $('#request').setAttribute('aria-disabled', !chosenConsult);
   steps.forEach((s, i) => s.classList.toggle('on', i === 0 || (i === 1 && !!goal) || (i === 2 && !!chosenConsult)));
@@ -287,48 +288,76 @@ $('#addons').addEventListener('click', (e) => {
   renderSummary();
 });
 
-// "Send Word to the Forge" shows a ready-to-copy email on the page instead of opening an email app.
-function writeDraft() {
-  const lines = [`Hi Forgemaster! I'd like to book: ${goal.name}`, `- ${chosenConsult.name} (${priceLabel(chosenConsult)})`];
+// "Send Word to the Forge" sends the plan and the visitor's message through Web3Forms,
+// which emails it to the Fitness Forge inbox. The access key is meant to be public.
+const FORM_KEY = 'b0d8ff2a-e942-4927-a226-f63c8a366a4b';
+const form = $('#send');
+const status = $('#send-status');
+const STATUS_TEXT = status.textContent;
+
+function planText() {
+  const lines = [`Goal: ${goal.name}`, `- ${chosenConsult.name} (${priceLabel(chosenConsult)})`];
   chosen.forEach((key) => lines.push(key === 'none' ? '- No add-ons' : `- ${ADDONS[key].name} (${ADDONS[key].price})`));
   const t = totals();
   lines.push(`${t.estimate ? 'Estimated total' : 'Total'} with the new client discount: ${t.total}`);
   if (t.ongoing.length) lines.push(`Plus ${t.ongoing.join(' and ')}`);
-  lines.push('', 'A bit about me and my goals:', '');
-  $('#draft-to').textContent = EMAIL;
-  $('#draft-subject').textContent = 'Forge Interest';
-  $('#draft-body').value = lines.join('\n');
+  return lines.join('\n');
 }
 
-$('#request').addEventListener('click', () => {
+function setStatus(text, isError) {
+  status.innerHTML = text;
+  status.classList.toggle('error', !!isError);
+}
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
   if (!chosenConsult) return;
-  writeDraft();
-  $('#draft').hidden = false;
-  const body = $('#draft-body');
-  body.focus();
-  body.setSelectionRange(body.value.length, body.value.length);
+  const name = $('#send-name').value.trim();
+  const email = $('#send-email').value.trim();
+  if (!name) { setStatus('Please add your name.', true); $('#send-name').focus(); return; }
+  if (!$('#send-email').checkValidity() || !email) { setStatus('Please add a valid email so the Forgemaster can reply.', true); $('#send-email').focus(); return; }
+
+  const about = $('#send-about').value.trim();
+  const message = `${planText()}\n\nA bit about me and my goals:\n${about || '(nothing added)'}`;
+  const button = $('#request');
+  button.disabled = true;
+  button.textContent = 'Sending…';
+  setStatus(STATUS_TEXT);
+
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        access_key: FORM_KEY,
+        subject: `Forge Interest: ${goal.name}`,
+        from_name: 'Fitness Forge website',
+        name,
+        email,
+        message,
+        botcheck: form.querySelector('.trap').checked,
+      }),
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message || 'Send failed');
+    $('#sent-email').textContent = email;
+    form.hidden = true;
+    $('#sent').hidden = false;
+    $('#sent').focus();
+  } catch {
+    setStatus(`That didn't go through. Please try again, or email <a href="mailto:${EMAIL}">${EMAIL}</a>.`, true);
+  } finally {
+    button.disabled = false;
+    button.textContent = 'Send Word to the Forge';
+  }
 });
 
-$('#draft').addEventListener('click', async (e) => {
-  const btn = e.target.closest('.copy');
-  if (!btn) return;
-  const el = document.getElementById(btn.dataset.copy);
-  const text = el.value !== undefined ? el.value : el.textContent;
-  try {
-    await navigator.clipboard.writeText(text);
-  } catch {
-    // Older browsers: select the text so it can be copied by hand.
-    const range = document.createRange();
-    range.selectNodeContents(el);
-    getSelection().removeAllRanges();
-    getSelection().addRange(range);
-    if (el.select) el.select();
-    document.execCommand('copy');
-  }
-  const label = btn.textContent;
-  btn.textContent = 'Copied!';
-  btn.classList.add('done');
-  setTimeout(() => { btn.textContent = label; btn.classList.remove('done'); }, 1500);
+$('#send-again').addEventListener('click', () => {
+  $('#send-about').value = '';
+  $('#sent').hidden = true;
+  form.hidden = false;
+  setStatus(STATUS_TEXT);
+  $('#send-about').focus();
 });
 
 renderGoals();

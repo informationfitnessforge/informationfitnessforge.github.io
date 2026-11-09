@@ -294,21 +294,28 @@ section { padding: clamp(64px, 10vw, 120px) clamp(16px, 6vw, 80px); }
 .btn.disabled { opacity: .45; pointer-events: none; box-shadow: none; }
 .summary-note { margin: .7rem 0 0; font-size: .78rem; color: var(--muted); text-align: center; }
 
-/* The email draft shown under "Write my email" */
-.draft { margin-top: 1.2rem; padding-top: 1.1rem; border-top: 1px solid var(--line); display: grid; gap: .6rem; }
-.draft-field {
-  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: .5rem;
-  padding: .55rem .6rem; border-radius: 8px; background: var(--bg-2); border: 1px solid var(--line);
-}
-.draft-label { font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--fire); }
-.draft-label span { text-transform: none; letter-spacing: 0; font-weight: 400; color: var(--muted); }
-.draft-value { font-size: .85rem; color: var(--text); overflow-wrap: anywhere; }
-.draft textarea {
-  width: 100%; padding: .7rem .75rem; border-radius: 8px;
+/* "Send Word to the Forge" form; its fields appear once a consultation is chosen */
+.send { display: grid; gap: .35rem; }
+.send:not(.ready) > :not(.btn):not(.summary-note) { display: none; }
+.send .btn { margin-top: .6rem; }
+.send .btn:disabled { opacity: .7; cursor: wait; }
+.field-label { margin-top: .35rem; font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--fire); }
+.field-label span { text-transform: none; letter-spacing: 0; font-weight: 400; color: var(--muted); }
+.send input, .send textarea {
+  width: 100%; padding: .6rem .75rem; border-radius: 8px;
   border: 1px solid var(--line); background: var(--bg-2); color: var(--text);
-  font: .86rem/1.5 var(--sans); resize: vertical;
+  font: .9rem/1.5 var(--sans);
 }
-.draft textarea:focus { outline: none; border-color: var(--fire); box-shadow: 0 0 0 3px rgba(255, 122, 26, .2); }
+.send textarea { resize: vertical; }
+.send input:focus, .send textarea:focus { outline: none; border-color: var(--fire); box-shadow: 0 0 0 3px rgba(255, 122, 26, .2); }
+.send .trap { position: absolute; left: -9999px; width: 1px; height: 1px; }
+.summary-note.error { color: #ff8a6a; }
+.summary-note a { color: var(--fire-2); overflow-wrap: anywhere; }
+.sent { padding: 1rem; border-radius: 10px; border: 1px solid var(--fire); background: #26150b; text-align: center; }
+.sent:focus { outline: none; }
+.sent p { margin: 0 0 .8rem; font-size: .9rem; color: var(--muted); overflow-wrap: anywhere; }
+.sent strong { color: var(--text); }
+.sent-title { font: 700 1.1rem var(--serif); color: var(--fire-2) !important; }
 .copy {
   border: 1px solid var(--fire); border-radius: 999px; background: transparent;
   color: var(--fire-2); font: 600 .78rem var(--sans); padding: .3rem .75rem; cursor: pointer;
