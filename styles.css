@@ -310,7 +310,13 @@ section { padding: clamp(64px, 10vw, 120px) clamp(16px, 6vw, 80px); }
 .summary-promo { font-size: .88rem; color: var(--muted); margin: 0 0 1.2rem; }
 .summary-promo strong { color: var(--fire-2); }
 .summary .btn { width: 100%; text-align: center; }
-.btn.disabled { opacity: .45; pointer-events: none; box-shadow: none; }
+.btn.disabled { opacity: .45; box-shadow: none; }
+.btn.disabled:hover { transform: none; }
+.options.nudge .option, .addons.nudge .addon { animation: nudge 1.2s ease-out; }
+@keyframes nudge {
+  0%, 100% { border-color: var(--line); box-shadow: none; }
+  25%, 60% { border-color: var(--fire); box-shadow: var(--glow); }
+}
 .summary-note { margin: .7rem 0 0; font-size: .78rem; color: var(--muted); text-align: center; }
 
 /* "Send Word to the Forge" form; its fields appear once a consultation is chosen */

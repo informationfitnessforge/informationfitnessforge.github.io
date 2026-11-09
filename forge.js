@@ -226,6 +226,7 @@ function renderSummary() {
   if (chosenConsult) items.push(`<li><span>${chosenConsult.name}</span><span>${priceLabel(chosenConsult)}</span></li>`);
   else items.push('<li class="empty"><span>Choose a consultation</span><span></span></li>');
   chosen.forEach((key) => items.push(`<li><span>${ADDONS[key].name}</span><span>${ADDONS[key].price}</span></li>`));
+  if (chosenConsult && !chosen.size) items.push('<li class="empty"><span>Choose add-ons, or None</span><span></span></li>');
   $('#summary-list').innerHTML = items.join('');
 
   const tally = $('#tally');
@@ -245,8 +246,17 @@ function renderSummary() {
   // The tally already shows the discount, so the promo line is only needed before a consultation is picked.
   $('#promo').hidden = !!chosenConsult;
   $('#send').classList.toggle('ready', !!chosenConsult);
-  $('#request').classList.toggle('disabled', !chosenConsult);
-  $('#request').setAttribute('aria-disabled', !chosenConsult);
+  // The button stays dim until every step is done; clicking it early points to the missing step.
+  const incomplete = !!missingStep();
+  $('#request').classList.toggle('disabled', incomplete);
+  $('#request').setAttribute('aria-disabled', incomplete);
+  // Once the step they were pointed to is done, clear the reminder.
+  // A reminder that's showing follows along: it moves to the next missing step, then clears.
+  if (status.dataset.step) {
+    const next = missingStep();
+    setStatus(next ? next.text : STATUS_TEXT, !!next);
+    if (next) status.dataset.step = 'true';
+  }
   steps.forEach((s, i) => s.classList.toggle('on', i === 0 || (i === 1 && !!goal) || (i === 2 && !!chosenConsult)));
 }
 
@@ -305,11 +315,29 @@ function planText() {
 function setStatus(text, isError) {
   status.innerHTML = text;
   status.classList.toggle('error', !!isError);
+  delete status.dataset.step;
+}
+
+// The first step still to do before the plan can be sent, if any.
+function missingStep() {
+  if (!chosenConsult) return { text: 'Choose a consultation first, then send your plan.', el: $('#consults') };
+  if (!chosen.size) return { text: "Choose your add-ons, or None if you don't want any.", el: $('#addons') };
+  return null;
 }
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
-  if (!chosenConsult) return;
+  const missing = missingStep();
+  if (missing) {
+    // A step isn't done yet: say which, and take them back to it.
+    setStatus(missing.text, true);
+    status.dataset.step = 'true';
+    missing.el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    missing.el.classList.remove('nudge');
+    void missing.el.offsetWidth;
+    missing.el.classList.add('nudge');
+    return;
+  }
   const name = $('#send-name').value.trim();
   const email = $('#send-email').value.trim();
   if (!name) { setStatus('Please add your name.', true); $('#send-name').focus(); return; }
