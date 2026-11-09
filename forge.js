@@ -52,7 +52,7 @@ const LORE = {
 const consult = (id, name, length, price, from, text) => ({ id, name, length, price, from, lore: LORE[id], text });
 
 const STANDARD = [
-  consult('quick', 'Quick Consult', '30 minutes', 45, true,
+  consult('quick', 'Quick Consult', '30 minutes', 60, true,
     'Thirty-minute session covering basic knowledge and planning for achieving your goal!'),
   consult('learner', 'Standard Consult', 'One hour', 100, true,
     'One-hour session covering knowledge, exploring modes of action, and creating personalized designs for achieving your goal!'),
@@ -63,6 +63,7 @@ const STANDARD = [
 const GOALS = [
   {
     id: 'sculpt',
+    service: 'Nutrition Coaching',
     name: 'Sculpt a New Physique',
     lore: 'Every good sculpture begins with a block of stone where only delicate and precise skill can uncover the work within.',
     blurb: 'Learn proper skills for weight management in order to lose weight, reduce fat, improve quality of life, and feel comfortable in your new body!',
@@ -73,6 +74,7 @@ const GOALS = [
   },
   {
     id: 'foundations',
+    service: 'Strength and Conditioning',
     name: 'Lay Strong Foundations',
     lore: 'The tallest towers require a firm and stable foundation, one laid with the best iron and architected with the most skillful hands.',
     blurb: 'Utilize the very best techniques to increase muscle mass and strength, allowing you to look and feel stronger than ever before!',
@@ -83,6 +85,7 @@ const GOALS = [
   },
   {
     id: 'furnace',
+    service: 'Cardio Training',
     name: 'Upgrade the Furnace that Fuels',
     lore: 'Only the strongest of flames can forge the sharpest of blades within the heart of the furnace.',
     blurb: 'Use the best tools to improve cardiovascular health by training the most important muscle of the body, the heart, keeping the body’s furnace burning strong and ensuring you feel as fit as possible!',
@@ -93,14 +96,15 @@ const GOALS = [
   },
   {
     id: 'masterwork',
+    service: 'Integrated Diet and Exercise',
     name: 'Forge the Ultimate Work of Art',
     lore: 'The best tool is one that is pieced together in the hottest flames, crafted of the strongest materials, and carved with expert precision.',
     blurb: 'Combine skills from cardiovascular training, building muscle, and managing weight for an integrated approach to achieving the best version of you!',
-    img: '/assets/goal-shake.jpg',
-    alt: 'A man sitting in a gym after a workout, scooping protein into his shaker',
+    img: '/assets/goal-split.jpg',
+    alt: 'Half a colourful salad bowl and half a man lifting a weight plate in a gym, split by a glowing line',
     consults: [
-      consult('quick', 'Quick Consult', '45 minutes', 75, true,
-        'Forty-five-minute session covering basic knowledge and planning for achieving your goal!'),
+      consult('quick', 'Quick Consult', '30 minutes', 60, true,
+        'Thirty-minute session covering basic knowledge and planning for achieving your goal!'),
       consult('learner', 'Standard Consult', '90 minutes', 150, true,
         'Ninety-minute session covering knowledge, exploring modes of action, and creating personalized designs for achieving your goal!'),
       consult('apprentice', 'Extended Consults', 'One month: one 90-minute and three one-hour sessions', 500, true,
@@ -110,6 +114,7 @@ const GOALS = [
   },
   {
     id: 'designs',
+    service: 'Other',
     name: 'Craft New Designs',
     lore: 'All quests are different, and individual journeys may call for an expansion of services or unique crafts.',
     blurb: 'Accomplish personal health goals not on display, working closely with expert hands to craft all the designs needed for your specific task!',
@@ -168,7 +173,7 @@ function selectGoal(id) {
   $('#goal-intro').innerHTML = `
     <p class="eyebrow">${goal.name}</p>
     <p class="lore">${goal.lore}</p>
-    <p>${goal.blurb}</p>`;
+    <p><strong class="service">${goal.service}:</strong> ${goal.blurb}</p>`;
 
   $('#consults').innerHTML = goal.consults.map((c, i) => `
     <button class="option" role="radio" aria-checked="false" data-id="${c.id}" style="--i:${i}">
@@ -311,7 +316,7 @@ function planText() {
   const t = totals();
   const lines = [
     `Client: ${t.discount ? 'First time' : 'Returning'}`,
-    `Goal: ${goal.name}`,
+    `Goal: ${goal.name} (${goal.service})`,
     `- ${chosenConsult.name} (${priceLabel(chosenConsult)})`,
   ];
   chosen.forEach((key) => lines.push(key === 'none' ? '- No add-ons' : `- ${ADDONS[key].name} (${ADDONS[key].price})`));

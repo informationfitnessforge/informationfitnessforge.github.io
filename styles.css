@@ -236,6 +236,7 @@ section { padding: clamp(64px, 10vw, 120px) clamp(16px, 6vw, 80px); }
 
 .block-title { font-size: 1.35rem; margin: 2rem 0 .3rem; }
 .lore { font-style: italic; color: var(--fire-2); opacity: .9; margin: 0 0 .6rem; }
+.service { color: var(--text); font-weight: 700; }
 .options { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: .9rem; margin-top: .9rem; }
 .option {
   display: flex; flex-direction: column; gap: .35rem; text-align: left;
