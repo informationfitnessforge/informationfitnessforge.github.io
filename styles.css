@@ -396,6 +396,25 @@ section { padding: clamp(64px, 10vw, 120px) clamp(16px, 6vw, 80px); }
 .quote figcaption span { color: var(--muted); }
 .quote-link { color: var(--fire-2); text-decoration: none; font-weight: 500; }
 
+/* A single featured testimonial (until there are enough for the grid above) */
+.quote-feature {
+  position: relative; max-width: 760px; margin: 0 auto;
+  padding: clamp(2rem, 5vw, 3rem) clamp(1.4rem, 5vw, 3.2rem) clamp(1.6rem, 4vw, 2.4rem);
+  border-top: 3px solid var(--fire); box-shadow: 0 20px 60px rgba(255, 90, 10, .12);
+  gap: 1.4rem;
+}
+.quote-feature::before {
+  content: '\201C'; position: absolute; top: -.15em; left: 50%; transform: translateX(-50%);
+  font: 900 5.5rem/1 var(--serif); color: var(--fire);
+  text-shadow: 0 0 24px rgba(255, 122, 26, .45);
+}
+.quote-feature blockquote { font-size: clamp(1.02rem, 2vw, 1.18rem); line-height: 1.75; text-align: center; }
+.quote-feature blockquote::before { content: none; }
+.quote-feature figcaption { align-items: center; text-align: center; }
+.quote-feature figcaption strong { font: 700 1.1rem var(--serif); color: var(--fire-2); }
+.quote-cta { margin: 2.4rem auto 0; text-align: center; }
+.quote-cta p { margin: 1rem 0 0; color: var(--muted); font-size: .92rem; }
+
 /* Footer */
 .footer {
   padding: 2rem clamp(16px, 6vw, 80px) 2.5rem;

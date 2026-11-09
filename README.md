@@ -4,7 +4,7 @@ Static site for Fitness Forge, hosted on GitHub Pages from `main` (repo `informa
 
 - `index.html`: home page
 - `forge/`, `about/`, `contact/`: the other pages (each repeats the shared header and footer)
-- `testimonials/`: template layout with placeholder content (replace with real quotes)
+- `testimonials/`: client testimonials; one featured quote for now (`.quote-feature`), switch to the `.quotes` grid once there are several
 - `forge.js`: the goals, consultations, add-ons and prices (edit `GOALS` / `ADDONS` to change offerings), and the "Send Word to the Forge" form, which sends through Web3Forms (free; key in `FORM_KEY`, set up under information.fitness.forge@gmail.com)
 - `site.js`: footer year and current-page highlight in the menu
 - `styles.css`: styles
