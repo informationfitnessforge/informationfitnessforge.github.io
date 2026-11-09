@@ -151,6 +151,25 @@ section { padding: clamp(64px, 10vw, 120px) clamp(16px, 6vw, 80px); }
 .path p:not(.eyebrow) { color: var(--muted); margin: 0 0 1.2rem; }
 .path-go { margin-top: auto; color: var(--fire-2); font-weight: 600; }
 
+/* Enter the Forge: the four ways in, over the fire */
+.gateway { justify-content: center; }
+.gateway .hero-bg::after {
+  background:
+    radial-gradient(ellipse at 50% 55%, rgba(10, 6, 4, .45) 0%, rgba(10, 6, 4, .78) 70%),
+    linear-gradient(0deg, var(--bg) 0%, transparent 20%);
+}
+.gateway-inner { width: 100%; max-width: 1280px; }
+.gateway-head { text-align: center; margin-bottom: 2.2rem; }
+.gateway h1 { font-size: clamp(2rem, 5vw, 3.4rem); text-shadow: 0 2px 30px rgba(0, 0, 0, .6); }
+.gateway .path {
+  background: rgba(22, 14, 10, .72); backdrop-filter: blur(6px);
+  border-color: rgba(255, 179, 71, .18);
+  animation: strike .55s ease-out both; animation-delay: calc(.15s + var(--i, 0) * .1s);
+}
+.gateway .path:nth-child(2) { --i: 1; }
+.gateway .path:nth-child(3) { --i: 2; }
+.gateway .path:nth-child(4) { --i: 3; }
+
 /* Forge */
 .forge { background: radial-gradient(ellipse at 50% 0%, #2a160b 0%, var(--bg) 60%); }
 .steps {
