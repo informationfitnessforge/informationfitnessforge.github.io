@@ -103,8 +103,8 @@ const GOALS = [
     img: '/assets/goal-split.jpg',
     alt: 'Half a colourful salad bowl and half a man lifting a weight plate in a gym, split by a glowing line',
     consults: [
-      consult('quick', 'Quick Consult', '30 minutes', 60, true,
-        'Thirty-minute session covering basic knowledge and planning for achieving your goal!'),
+      consult('quick', 'Quick Consult', '45 minutes', 90, true,
+        'Forty-five-minute session covering basic knowledge and planning for achieving your goal!'),
       consult('learner', 'Standard Consult', '90 minutes', 150, true,
         'Ninety-minute session covering knowledge, exploring modes of action, and creating personalized designs for achieving your goal!'),
       consult('apprentice', 'Extended Consults', 'One month: one 90-minute and three one-hour sessions', 500, true,
